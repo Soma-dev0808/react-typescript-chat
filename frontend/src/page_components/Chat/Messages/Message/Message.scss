@@ -1,0 +1,84 @@
+@import "../../../../common_components/Common.scss";
+
+.message-box {
+  background: $color-deep-white;
+  border-radius: 20px;
+  padding: $p-s $p-l;
+  color: $color-white;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.message-text {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1.1em;
+  word-wrap: break-word;
+}
+
+.message-text img {
+  vertical-align: middle;
+}
+
+.message-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 $p-m;
+  margin-top: 3px;
+}
+
+.sent-info {
+  display: flex;
+  flex-direction: column;
+  color: $color-grey;
+}
+
+.sent-info-me {
+  align-items: flex-end;
+}
+
+.sent-info-other {
+  align-items: flex-start;
+}
+
+.sent-text {
+  font-size: 14px;
+  font-family: Helvetica;
+  letter-spacing: 0.3px;
+  flex-grow: 1;
+}
+
+.sent-time {
+  flex-grow: 0;
+  font-size: 11px;
+  justify-content: end;
+  justify-self: end;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 1px;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.color-white {
+  color: $color-white;
+}
+
+.color-dark {
+  color: $color-dark;
+}
+
+.background-blue {
+  background: $primary-color;
+}
+
+.background-light {
+  background: $color-deep-white;
+}

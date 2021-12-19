@@ -1,0 +1,63 @@
+$color-white: #fff;
+$color-deep-white: #f3f3f3;
+$color-dark: #353535;
+$color-grey: #828282;
+$error-color: #ff5a5f;
+$default-color: #6c757d;
+$primary-color: #2979ff;
+$danger-color: #dc3545;
+$bg-color-black: #1a1a1d;
+$header-color: #242526;
+$api-message-color: #353535;
+$space-xs: 5px;
+$space-s: 10px;
+$space-m: 20px;
+$space-l: 30px;
+$p-s: 4px;
+$p-m: 8px;
+$p-l: 16px;
+$form-width-s: 90%;
+$form-width-m: 60%;
+$form-width-l: 20%;
+
+.mt-10 {
+  margin-top: $space-s;
+}
+
+.mt-20 {
+  margin-top: $space-m;
+}
+
+.mb-10 {
+  margin-bottom: $space-s;
+}
+
+.mb-20 {
+  margin-bottom: $space-m;
+}
+
+.pl-10 {
+  padding-left: $space-s;
+}
+
+.pr-10 {
+  padding-right: $space-s;
+}
+
+@mixin desktop {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}

@@ -1,0 +1,62 @@
+@import "../Common.scss";
+
+.custom-button {
+  color: $color-white;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: $default-color;
+  padding: $space-m;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button-primary {
+  background: $primary-color;
+}
+
+.button-danger {
+  background: $danger-color;
+}
+
+.button-xs {
+  padding: $space-xs;
+}
+
+.button-sm {
+  padding: $space-s;
+}
+
+.button-lg {
+  padding: $space-l;
+}
+
+.button-loading-indicator,
+.button-loading-indicator :after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.button-loading-indicator {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

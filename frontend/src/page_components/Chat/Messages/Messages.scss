@@ -1,0 +1,70 @@
+@import "../../../common_components/Common.scss";
+
+.messages {
+  padding: 2% 0;
+  overflow: auto;
+  flex: auto;
+}
+
+.scroll-to-bottom-button {
+  position: sticky;
+  bottom: 0px;
+  left: 94%;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #5851517d;
+  cursor: pointer;
+  padding: 11px;
+  border-radius: 11px;
+
+  @include tablet {
+    left: 90%;
+  }
+}
+
+.show-bottom-button {
+  animation: inAnimation 250ms ease-in;
+}
+
+.hide-bottom-button {
+  animation: outAnimation 270ms ease-out;
+  animation-fill-mode: forwards;
+  display: none;
+}
+
+.date-label-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: $space-s 0;
+}
+
+.date-label {
+  color: #0000007d;
+  padding: $p-m;
+  text-align: center;
+  border-bottom: 1px solid #5c5b5b7d;
+  width: 60%;
+}
+
+@keyframes inAnimation {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes outAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

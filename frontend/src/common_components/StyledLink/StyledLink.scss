@@ -1,0 +1,12 @@
+@import "../Common.scss";
+
+.link-container {
+  margin-top: $space-m;
+  .styled-link {
+    color: $color-white;
+  }
+
+  .disable-link {
+    pointer-events: none;
+  }
+}
