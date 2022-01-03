@@ -1,0 +1,48 @@
+@import "../Common.scss";
+
+.common-search-form {
+  display: flex;
+  width: 100%;
+
+  .common-search-form-inputbox {
+    border: none;
+    border-radius: 0;
+    padding: 5%;
+    width: 80%;
+    font-size: 1.2em;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .common-search-form-submit-button {
+    cursor: pointer;
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #2979ff;
+    padding: 20px;
+    display: inline-block;
+    border: none;
+    width: 20%;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  .common-search-form-button-image {
+    width: 100%;
+  }
+
+  .inputbox-sm {
+    font-size: 15px;
+    height: 30px;
+  }
+
+  .button-sm {
+    padding: $p-m;
+    height: 30px;
+
+    .common-search-form-button-image {
+      width: 13px;
+    }
+  }
+}

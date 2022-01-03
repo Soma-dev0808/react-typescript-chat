@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Button from "../../../common_components/Button/Button";
+import { routePath } from "../../../router/router";
+
 import ExistRooms from "../ExistRooms";
+import Button from "../../../common_components/Button/Button";
+import TextFormInput, { Size } from "../../../common_components/TextFormInput";
 import useAuth from "../../../common_components/CustomHooks/useAuth";
 import useFindRoom from "../../../common_components/CustomHooks/useFindRoom";
 import { setAPIError } from "../../../features/apiStatSlice";
@@ -14,17 +17,22 @@ import {
   ApiReturnRes,
 } from "../../../utils/utilities";
 import { en } from "../../../utils/language";
-import { routePath } from "../../../router/router";
+import searchIcon from "../../../icons/searchIcon.png";
 
-import "../Room.scss";
+import "./FindRoom.scss";
 
 interface Props {
   handleClose: () => void;
 }
 
+export interface SearchFilterState {
+  roomName: string;
+}
+
 const FindRoom: React.FC<Props> = ({ handleClose }) => {
   const dispatch = useDispatch();
   const [isBottom, setIsBottom] = useState<boolean>(false);
+  const [roomName, setRoomName] = useState<string>("");
   const { username } = useAuth();
   const history = useHistory();
 
@@ -36,12 +44,12 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
       // when reached bottom, update state and load more items.
       if (isBottom !== _isBottom) {
         if (
-          !isLoading &&
           !isBottom &&
+          !isLoading &&
           roomList.nextRef !== null &&
           roomList.nextRef !== -1
         ) {
-          fetchExistRooms(roomList.nextRef);
+          fetchExistRooms(roomList.nextRef, { roomName });
         }
         setIsBottom(_isBottom);
       }
@@ -75,12 +83,28 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
     }
   };
 
+  const handleSearchSubmit = (text: string) => {
+    setRoomName(text);
+    if (!isLoading) {
+      fetchExistRooms(null, { roomName: text }, true);
+    }
+  };
+
   return (
     <div className="find-room-container">
       <div className="find-room-content">
         <div className="find-room-modal-header">
           <h3 className="find-room-modal-title">{en.FIND_ROOMS}</h3>
-          <div>
+          <div className="find-room-search-area">
+            <TextFormInput
+              size={Size.sm}
+              buttonText=""
+              placeholderText="Room name"
+              buttonImage={searchIcon}
+              onButtonSubmit={handleSearchSubmit}
+            />
+          </div>
+          <div className="find-room-close-button">
             <Button
               size="xs"
               onClickEvent={handleClose}
