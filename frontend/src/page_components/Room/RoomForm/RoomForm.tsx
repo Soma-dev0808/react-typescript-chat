@@ -46,18 +46,17 @@ const RoomForm: React.FC<Props> = ({ isJoin, buttonAction }) => {
               buttonText={buttonTitle}
               buttonType="submit"
             />
-
-            {isJoin && (
-              <>
-                <Button
-                  classnames="mt-20"
-                  buttonText={en.FIND_ROOMS}
-                  onClickEvent={handleOnToggle}
-                />
-                {isShow && <FindRooms handleClose={handleOnToggle} />}
-              </>
-            )}
           </form>
+          {isJoin && (
+            <>
+              <Button
+                classnames="mt-20"
+                buttonText={en.FIND_ROOMS}
+                onClickEvent={handleOnToggle}
+              />
+              {isShow && <FindRooms handleClose={handleOnToggle} />}
+            </>
+          )}
 
           <StyledLink to={roomLink} title={roomLinkTitle} />
         </div>

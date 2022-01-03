@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import { db, auth, UserInfoType } from "../../../utils/firebase";
+import { SearchFilterState } from "../FindRooms";
 import {
   ApiReturnRes,
   convertFBApiResponse,
@@ -13,20 +14,40 @@ interface RoomInfo {
   roomName: string;
 }
 
-// Fetch existing room list
-export const fetchRoomList = async (listFetchLimit: number, nextRef: any) => {
+const _collection = (
+  collectionName: string
+): firebase.firestore.Query<firebase.firestore.DocumentData> => {
+  return db.collection(collectionName);
+};
+
+// Fetch all existing room list
+export const fetchRoomList = async (
+  listFetchLimit: number,
+  nextRef: any,
+  filterObj: SearchFilterState
+) => {
   const roomList: firebase.firestore.DocumentData[] = [];
-  // if there's nextRef, add startAfter
-  const currList = nextRef
-    ? db
-        .collection(en.ROOMS)
-        .orderBy(en.DATE_CREATED)
-        .startAfter(nextRef)
-        .limit(listFetchLimit)
-    : db.collection(en.ROOMS).orderBy(en.DATE_CREATED).limit(listFetchLimit);
+  let query = _collection(en.ROOMS);
+
+  if (filterObj?.roomName) {
+    query = query
+      .where("roomName", ">=", filterObj?.roomName)
+      .where("roomName", "<=", filterObj?.roomName + "z")
+      .orderBy("roomName");
+  }
+
+  query = query.orderBy(en.DATE_CREATED);
+
+  // nextRef is a pointer to fetch data collectly if there are more than 'listFetchLimit' data.
+  if (nextRef) {
+    query = query.startAfter(nextRef);
+  }
+
+  query = query.limit(listFetchLimit);
 
   try {
-    const snapshot = await currList.get();
+    const snapshot = await query.get();
+
     if (snapshot.empty) {
       return convertFBApiResponse(true, { roomList, nextRef: -1 });
     }
