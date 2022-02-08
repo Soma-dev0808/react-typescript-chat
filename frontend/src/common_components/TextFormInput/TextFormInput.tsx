@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 
 import { classNames, isNullOrUndefined } from "../../utils/utilities";
+import { TextFormInputSize } from "../../utils/types";
 import "./TextFormInput.scss";
-
-// currently only sm available
-export enum Size {
-  sm = "sm",
-}
 
 interface TextFormInputState {
   manualInputText?: string;
-  size?: Size;
+  size?: TextFormInputSize;
   buttonText?: string;
   buttonImage?: string;
   placeholderText?: string;

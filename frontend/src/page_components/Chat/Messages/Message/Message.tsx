@@ -1,5 +1,5 @@
 import React from "react";
-import { MessaageType } from "../../../../utils/firebase";
+import { MessaageType } from "../../../../utils/types";
 
 import "./Message.scss";
 

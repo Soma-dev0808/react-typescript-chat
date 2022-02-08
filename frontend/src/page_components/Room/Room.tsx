@@ -11,10 +11,10 @@ import RoomForm from "./RoomForm/RoomForm";
 import useAuth from "../../common_components/CustomHooks/useAuth";
 import { routePath } from "../../router/router";
 import {
-  ApiReturnRes,
   createUrlWithQueryString,
   validateEmptyString,
 } from "../../utils/utilities";
+import { ApiReturnRes } from "../../utils/types";
 import { en } from "../../utils/language";
 import { History } from "history";
 

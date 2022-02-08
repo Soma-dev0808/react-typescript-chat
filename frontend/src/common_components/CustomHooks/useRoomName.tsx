@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { routePath } from "../../router/router";
 import { retrieveQsObjProp } from "../../utils/utilities";
+import { UseRoomNameType } from "../../utils/types";
 import { Location } from "history";
 
 interface useRoomNameProps {
   location: Location;
 }
 
-export interface useRoomNameType {
-  room: string;
-}
-
-const useRoomName = ({ location }: useRoomNameProps): useRoomNameType => {
+const useRoomName = ({ location }: useRoomNameProps): UseRoomNameType => {
   const history = useHistory();
   const [room, setRoom] = useState<string>("");
 

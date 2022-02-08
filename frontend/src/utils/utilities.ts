@@ -1,16 +1,12 @@
 import { Dispatch } from "react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import * as H from "history";
+import firebase from "firebase/app";
+import qs, { ParsedQs } from "qs";
+
+import { ApiReturnRes } from "../utils/types";
 import { ApiErrorState } from "../features/apiStatSlice";
 import { en } from "./language";
-import qs, { ParsedQs } from "qs";
-import firebase from "firebase/app";
-
-export interface ApiReturnRes {
-  isSuccess: boolean;
-  value?: any;
-  errorMessage?: string;
-}
 
 interface LocationProps {
   location: H.Location;

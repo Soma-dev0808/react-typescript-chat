@@ -1,3 +1,1 @@
-import RoomForm from "./RoomForm";
-
-export default RoomForm;
+export { default } from "./RoomForm";

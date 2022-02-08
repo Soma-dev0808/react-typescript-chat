@@ -2,11 +2,11 @@ import { useEffect, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { RoomInfoType } from "../../utils/firebase";
-import { SearchFilterState } from "../../page_components/Room/FindRooms";
 import { fetchRoomList } from "../../page_components/Room/service/service";
 import useInit from "../CustomHooks/useInit";
 import { setAPIError } from "../../features/apiStatSlice";
 import { en } from "../../utils/language";
+import { SearchFilterState } from "../../utils/types";
 
 interface InitFindRoomState {
   rooms: Array<RoomInfoType>;

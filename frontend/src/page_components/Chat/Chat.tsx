@@ -11,27 +11,23 @@ import Messages from "./Messages";
 import TextContainer from "./TextContainer";
 import LoadingIndicator from "../../common_components/LoadingIndicator";
 
-import useChatRoomInfo, {
-  useChatRoomInfoType,
-} from "../../common_components/CustomHooks/useChatRoomInfo";
-import useRoomName, {
-  useRoomNameType,
-} from "../../common_components/CustomHooks/useRoomName";
-import { MessageArrayType, saveMessages } from "./service/service";
+import useChatRoomInfo from "../../common_components/CustomHooks/useChatRoomInfo";
+import useRoomName from "../../common_components/CustomHooks/useRoomName";
+import { saveMessages } from "./service/service";
 import { en } from "../../utils/language";
-import { ApiReturnRes } from "../../utils/utilities";
+import {
+  ApiReturnRes,
+  UseChatRoomInfoType,
+  UseRoomNameType,
+  CurrUsers,
+  MessageArrayType,
+} from "../../utils/types";
 
 import "./Chat.scss";
 
 const ENDPOINT: string =
   process.env.REACT_APP_SERVER_ENDPOINT || "Unknown end point";
 let socket: Socket;
-
-export interface CurrUsers {
-  id: number;
-  name: string;
-  room: string;
-}
 
 interface ChatProps {
   history: History;
@@ -46,12 +42,12 @@ const Chat: React.FC<ChatProps> = (props) => {
   const [users, setUsers] = useState<CurrUsers[]>([]);
   const [message, setMessage] = useState<string>("");
 
-  const { room }: useRoomNameType = useRoomName(props);
+  const { room }: UseRoomNameType = useRoomName(props);
   const {
     username,
     messages,
     setMessages,
-  }: useChatRoomInfoType = useChatRoomInfo(room);
+  }: UseChatRoomInfoType = useChatRoomInfo(room);
 
   // Start session
   useEffect(() => {
