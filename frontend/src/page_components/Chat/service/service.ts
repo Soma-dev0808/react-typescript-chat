@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import { db, auth, UserInfoType, MessaageType } from "../../../utils/firebase";
+import { db, auth, UserInfoType } from "../../../utils/firebase";
 import { en } from "../../../utils/language";
 import { ApiReturnRes, MessageArrayType } from "../../../utils/types";
 import { convertFBApiResponse } from "../../../utils/utilities";
