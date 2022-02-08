@@ -1,44 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## React Chat App
 
-## Available Scripts
+#### About this app:
+ 
+Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room, built with React, React-Context, JavaScript, and CSS.
 
-In the project directory, you can run:
+### Project Screen Shot(s)
 
-### `npm start`
+<div>
+ <img src="https://user-images.githubusercontent.com/55787141/152980902-0dab9c71-030b-4619-b766-43a78b279e8f.png" width="450">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ <img src="https://user-images.githubusercontent.com/55787141/152981084-35b66b8e-8431-4c43-b320-4be48b8d44d2.png" width="450">
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+ <img src="https://user-images.githubusercontent.com/55787141/152981225-d8d79254-97b3-4e5a-b747-59e925a1c739.png" width="450">
+</div>
 
-### `npm test`
+## Installation and Setup Instructions
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Grab firebase app configuration below and place them in .env file to make app able to use firestore.
 
-### `npm run build`
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Installation:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+`npm run setup`  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To Run Test Suite:  
 
-### `npm run eject`
+`cd frontend` 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`npm run test`  
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To Start Server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-- frontend --  <br>
+`cd frontend` 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`npm run start`
 
-## Learn More
+-- server -- <br>
+`cd ..` 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`cd server` 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm run start`
+
+To Visit App: 
+
+`localhost:3000/`  
