@@ -5,20 +5,14 @@ import { setAPIError, startOrEndCallApi } from "../../features/apiStatSlice";
 import {
   fetchUser,
   fetchMessages,
-  MessageArrayType,
 } from "../../page_components/Chat/service/service";
+import { UseChatRoomInfoType, MessageArrayType } from "../../utils/types";
 import { routePath } from "../../router/router";
 import { en } from "../../utils/language";
-import { ApiReturnRes } from "../../utils/utilities";
+import { ApiReturnRes } from "../../utils/types";
 
-export interface useChatRoomInfoType {
-  username: string;
-  messages: MessageArrayType[];
-  setMessages: React.Dispatch<React.SetStateAction<MessageArrayType[]>>;
-}
-
-// Get chat room information from firebase using room name.
-const useChatRoomInfo = (room: string): useChatRoomInfoType => {
+// Get chat room information from firebase by room name.
+const useChatRoomInfo = (room: string): UseChatRoomInfoType => {
   const dispatch = useDispatch();
   // states
   const [username, setName] = useState<string>("");

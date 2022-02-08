@@ -9,7 +9,7 @@ import {
 import AuthForm from "../Auth/AuthForm";
 import LoadingIndicator from "../../common_components/LoadingIndicator";
 import { handleSubmit } from "./service";
-import { UserInputProps } from "./AuthForm";
+import { UserInputProps } from "../../utils/types";
 import { History } from "history";
 
 interface Props {

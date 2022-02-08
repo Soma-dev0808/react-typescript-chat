@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CurrUsers } from "../Chat";
+import { CurrUsers } from "../../../utils/types";
 import { en } from "../../../utils/language";
 import onlineIcon from "../../../icons/onlineIcon.png";
 

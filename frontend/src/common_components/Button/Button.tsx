@@ -15,6 +15,7 @@ interface ButtonProps {
   isLoading?: boolean;
 }
 
+// common use button props
 const Button: React.FC<ButtonProps> = ({
   size = null,
   primary = false,

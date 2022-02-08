@@ -1,12 +1,11 @@
 import firebase from "firebase/app";
 import { db, auth, UserInfoType } from "../../../utils/firebase";
-import { SearchFilterState } from "../FindRooms";
 import {
-  ApiReturnRes,
   convertFBApiResponse,
   retrieveFBErrorMessage,
   isNullOrUndefined,
 } from "../../../utils/utilities";
+import { ApiReturnRes, SearchFilterState } from "../../../utils/types";
 import { en } from "../../../utils/language";
 
 interface RoomInfo {

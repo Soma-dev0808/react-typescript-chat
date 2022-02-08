@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Room from "./Room";
 import { launchRoomService } from "./service/service";
 import { SubmitActionProps } from "./Room";
-import { ApiReturnRes } from "../../utils/utilities";
+import { ApiReturnRes } from "../../utils/types";
 
 import "./Room.scss";
 

@@ -5,12 +5,12 @@ import {
   startOrEndCallApi,
   selectApiStatus,
 } from "../../features/apiStatSlice";
+import { History } from "history";
 
 import AuthForm from "../Auth/AuthForm";
 import LoadingIndicator from "../../common_components/LoadingIndicator";
 import { handleSubmit } from "./service";
-import { UserInputProps } from "./AuthForm";
-import { History } from "history";
+import { UserInputProps } from "../../utils/types";
 
 interface Props {
   history: History;

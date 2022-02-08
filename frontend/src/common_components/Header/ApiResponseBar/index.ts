@@ -1,3 +1,1 @@
-import ApiResponseBar from "./ApiResponseBar";
-
-export default ApiResponseBar;
+export { default } from "./ApiResponseBar";

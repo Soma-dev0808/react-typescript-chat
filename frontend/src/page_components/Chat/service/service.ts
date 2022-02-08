@@ -1,7 +1,8 @@
 import firebase from "firebase/app";
 import { db, auth, UserInfoType, MessaageType } from "../../../utils/firebase";
 import { en } from "../../../utils/language";
-import { convertFBApiResponse, ApiReturnRes } from "../../../utils/utilities";
+import { ApiReturnRes, MessageArrayType } from "../../../utils/types";
+import { convertFBApiResponse } from "../../../utils/utilities";
 
 export const fetchUser = async (roomName: string): Promise<ApiReturnRes> => {
   const { DB_ROOM_COLLECTION, ROOM_NOT_EXISTS_ERROR, FETCH_USER_ERROR } = en;
@@ -28,10 +29,6 @@ export const fetchUser = async (roomName: string): Promise<ApiReturnRes> => {
     return convertFBApiResponse(false, FETCH_USER_ERROR);
   }
 };
-
-export interface MessageArrayType extends MessaageType {
-  id?: string;
-}
 
 export const fetchMessages = async (
   roomName: string

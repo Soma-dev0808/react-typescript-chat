@@ -7,10 +7,10 @@ import {
 import { routePath } from "../../../router/router";
 import { en } from "../../../utils/language";
 import { History } from "history";
-import { ApiReturnRes } from "../../../utils/utilities";
+import { ApiReturnRes } from "../../../utils/types";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { ApiErrorState } from "../../../features/apiStatSlice";
-import { UserInputProps } from "../AuthForm";
+import { UserInputProps } from "../../../utils/types";
 
 // call sign up or sign in function with user input
 export const handleSubmit = async (
@@ -64,10 +64,7 @@ const signUp = async ({ username, email, password }: UserInputProps) => {
 const signIn = async ({ email, password }: Partial<UserInputProps>) => {
   if (!email || !password) {
     return Promise.resolve(
-      convertFBApiResponse(
-        false,
-        "System error email or password are null or undefined"
-      )
+      convertFBApiResponse(false, en.NO_EMAIL_OR_PASSWORD_SYSERROR)
     );
   }
 
@@ -90,7 +87,7 @@ const checkUsernameDuplication = async (
 ): Promise<boolean> => {
   const usernames = await db.collection(en.USERNAMES).get();
 
-  const res = await usernames.query.where("username", "==", username).get();
+  const res = await usernames.query.where(en.USERNAME, "==", username).get();
 
   return res.size === 0;
 };

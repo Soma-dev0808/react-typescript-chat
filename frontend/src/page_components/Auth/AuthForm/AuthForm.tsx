@@ -2,14 +2,9 @@ import React from "react";
 import { routePath } from "../../../router/router";
 import StyledLink from "../../../common_components/StyledLink";
 import Button from "../../../common_components/Button/Button";
+
 import { en } from "../../../utils/language";
 import "../Auth.scss";
-
-export interface UserInputProps {
-  username?: string;
-  email: string;
-  password: string;
-}
 
 interface AuthFormProps {
   isLogin: boolean;

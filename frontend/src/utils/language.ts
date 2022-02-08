@@ -12,6 +12,7 @@ export const en = {
   DESC_ORDER: "desc",
   // firestore collenction or document names
   ROOMS: "rooms",
+  USERNAME: "username",
   USERNAMES: "usernames",
   DATE_CREATED: "date_created",
   // socket.io
@@ -37,6 +38,8 @@ export const en = {
   USER_NOT_FOUND_IN_CHAT:
     "Your username were not found in the chat room, please re-join this room again.",
   REQUIRE_ROOM_NAME_ERROR: "Room name is required.",
+  NO_EMAIL_OR_PASSWORD_SYSERROR:
+    "System error email or password are null or undefined",
   // Page labels
   SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up",

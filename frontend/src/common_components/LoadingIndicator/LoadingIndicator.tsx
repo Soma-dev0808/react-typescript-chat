@@ -10,7 +10,7 @@ const LoadingIndicator: React.FC<LoadingBoolean> = ({ isLoading = false }) => {
   if (isLoading) {
     return (
       <div className="loading-indicator-container">
-        <div className="loading-indicator"></div>
+        <div className="loading-indicator" />
       </div>
     );
   }

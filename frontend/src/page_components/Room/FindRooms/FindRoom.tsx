@@ -5,7 +5,7 @@ import { routePath } from "../../../router/router";
 
 import ExistRooms from "../ExistRooms";
 import Button from "../../../common_components/Button/Button";
-import TextFormInput, { Size } from "../../../common_components/TextFormInput";
+import TextFormInput from "../../../common_components/TextFormInput";
 import useAuth from "../../../common_components/CustomHooks/useAuth";
 import useFindRoom from "../../../common_components/CustomHooks/useFindRoom";
 import { setAPIError } from "../../../features/apiStatSlice";
@@ -14,8 +14,8 @@ import {
   generateKey,
   handleScroll,
   createUrlWithQueryString,
-  ApiReturnRes,
 } from "../../../utils/utilities";
+import { ApiReturnRes, TextFormInputSize } from "../../../utils/types";
 import { en } from "../../../utils/language";
 import searchIcon from "../../../icons/searchIcon.png";
 
@@ -23,10 +23,6 @@ import "./FindRoom.scss";
 
 interface Props {
   handleClose: () => void;
-}
-
-export interface SearchFilterState {
-  roomName: string;
 }
 
 const FindRoom: React.FC<Props> = ({ handleClose }) => {
@@ -97,7 +93,7 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
           <h3 className="find-room-modal-title">{en.FIND_ROOMS}</h3>
           <div className="find-room-search-area">
             <TextFormInput
-              size={Size.sm}
+              size={TextFormInputSize.sm}
               buttonText=""
               placeholderText="Room name"
               buttonImage={searchIcon}
