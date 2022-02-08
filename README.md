@@ -18,7 +18,19 @@ Used Node.js for the backend, and socket.io for handling real time user status a
 
 ## Installation and Setup Instructions
 
-Grab firebase app configuration below and place them in .env file to make app able to use firestore.
+Firebase setup:
+Please visit firebase console and create a project to get firebaseConfig. In your project setting, grab firebaseConfig and create .env file in fontend folder.
+In your .env file you can copy and past the following, then set firebaseConfig for each REACT_APP_{firebaseConfig name}.
+
+REACT_APP_API_KEY=
+REACT_APP_AUTH_DOMAIN=
+REACT_APP_DATABASE_URL=
+REACT_APP_PROJECT_ID=
+REACT_APP_STORAGE_BUCKET=
+REACT_APP_MESSAGING_SENDER_ID=
+REACT_APP_APP_ID=
+REACT_APP_MEASUREMENT_ID=
+REACT_APP_SERVER_ENDPOINT=http://localhost:5000 
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
