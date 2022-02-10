@@ -6,10 +6,15 @@ import {
   fetchUser,
   fetchMessages,
 } from "../../page_components/Chat/service/service";
-import { UseChatRoomInfoType, MessageArrayType } from "../../utils/types";
+import {
+  UseChatRoomInfoType,
+  MessageArrayType,
+  ApiReturnErrorRes,
+} from "../../utils/types";
 import { routePath } from "../../router/router";
 import { en } from "../../utils/language";
 import { ApiReturnRes } from "../../utils/types";
+import { UserInfoType } from "../../utils/firebase";
 
 // Get chat room information from firebase by room name.
 const useChatRoomInfo = (room: string): UseChatRoomInfoType => {
@@ -22,14 +27,18 @@ const useChatRoomInfo = (room: string): UseChatRoomInfoType => {
   const fecthChatInfo = useCallback(async () => {
     dispatch(startOrEndCallApi(true));
 
-    const res1: ApiReturnRes = await fetchUser(room);
-    const res2: ApiReturnRes = await fetchMessages(room);
+    const res1 = (await fetchUser(room)) as ApiReturnRes<UserInfoType>;
+    const res2 = (await fetchMessages(room)) as ApiReturnRes<
+      MessageArrayType[]
+    >;
 
     // if there's an error, set the error
     if (!res1.isSuccess || !res2.isSuccess) {
+      const res1Err = res1 as ApiReturnErrorRes;
+      const res2Err = res2 as ApiReturnErrorRes;
       const errArray: string[] = [];
-      res1.errorMessage && errArray.push(res1.errorMessage);
-      res2.errorMessage && errArray.push(res2.errorMessage);
+      res1Err.errorMessage && errArray.push(res1Err.errorMessage);
+      res2Err.errorMessage && errArray.push(res2Err.errorMessage);
 
       // set error messages here
       dispatch(

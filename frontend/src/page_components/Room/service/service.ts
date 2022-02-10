@@ -5,7 +5,13 @@ import {
   retrieveFBErrorMessage,
   isNullOrUndefined,
 } from "../../../utils/utilities";
-import { ApiReturnRes, SearchFilterState } from "../../../utils/types";
+import {
+  ApiReturnRes,
+  ApiReturnErrorRes,
+  ApiReturnResponse,
+  SearchFilterState,
+  RoomListState,
+} from "../../../utils/types";
 import { en } from "../../../utils/language";
 
 interface RoomInfo {
@@ -24,7 +30,7 @@ export const fetchRoomList = async (
   listFetchLimit: number,
   nextRef: any,
   filterObj: SearchFilterState
-) => {
+): Promise<ApiReturnResponse<RoomListState>> => {
   const roomList: firebase.firestore.DocumentData[] = [];
   let query = _collection(en.ROOMS);
 
@@ -48,7 +54,10 @@ export const fetchRoomList = async (
     const snapshot = await query.get();
 
     if (snapshot.empty) {
-      return convertFBApiResponse(true, { roomList, nextRef: -1 });
+      return convertFBApiResponse(true, {
+        rooms: roomList,
+        nextRef: -1,
+      }) as ApiReturnRes<RoomListState>;
     }
 
     snapshot.docs.forEach((item) => {
@@ -62,9 +71,15 @@ export const fetchRoomList = async (
       snapshot.docs.length === listFetchLimit
         ? snapshot.docs[snapshot.docs.length - 1]
         : -1;
-    return convertFBApiResponse(true, { roomList, nextRef: lastFetchedItem });
+    return convertFBApiResponse(true, {
+      rooms: roomList,
+      nextRef: lastFetchedItem,
+    }) as ApiReturnRes<RoomListState>;
   } catch (err) {
-    return convertFBApiResponse(false, retrieveFBErrorMessage(err));
+    return convertFBApiResponse(
+      false,
+      retrieveFBErrorMessage(err)
+    ) as ApiReturnErrorRes;
   }
 };
 
@@ -72,16 +87,22 @@ export const fetchRoomList = async (
 export const launchRoomService = async ({
   username,
   roomName,
-}: RoomInfo): Promise<ApiReturnRes> => {
+}: RoomInfo): Promise<ApiReturnResponse<null>> => {
   const checkRoom = await db.collection(en.ROOMS).doc(roomName).get();
 
   // room is already exists
   if (checkRoom.exists) {
-    return convertFBApiResponse(false, en.ROOM_ALREADY_EXISTS_ERROR);
+    return convertFBApiResponse(
+      false,
+      en.ROOM_ALREADY_EXISTS_ERROR
+    ) as ApiReturnErrorRes;
   }
 
   if (!auth.currentUser) {
-    return convertFBApiResponse(false, en.FETCH_USER_ERROR);
+    return convertFBApiResponse(
+      false,
+      en.FETCH_USER_ERROR
+    ) as ApiReturnErrorRes;
   }
 
   return db
@@ -97,8 +118,14 @@ export const launchRoomService = async ({
       roomName,
       date_created: firebase.firestore.FieldValue.serverTimestamp(),
     })
-    .then(() => convertFBApiResponse())
-    .catch((err) => convertFBApiResponse(false, retrieveFBErrorMessage(err)));
+    .then(() => convertFBApiResponse() as ApiReturnRes<null>)
+    .catch(
+      (err) =>
+        convertFBApiResponse(
+          false,
+          retrieveFBErrorMessage(err)
+        ) as ApiReturnErrorRes
+    );
 };
 
 // join to existing room

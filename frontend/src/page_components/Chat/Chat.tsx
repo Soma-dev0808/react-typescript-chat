@@ -21,6 +21,7 @@ import {
   UseRoomNameType,
   CurrUsers,
   MessageArrayType,
+  ApiReturnErrorRes,
 } from "../../utils/types";
 
 import "./Chat.scss";
@@ -107,9 +108,14 @@ const Chat: React.FC<ChatProps> = (props) => {
           setMessage("");
         }
       });
-      const res: ApiReturnRes = await saveMessages({ message, room, username });
+      const res: ApiReturnRes<null> = await saveMessages({
+        message,
+        room,
+        username,
+      });
       if (!res?.isSuccess) {
-        dispatch(setAPIError({ apiErrorMessages: res?.errorMessage }));
+        const errMessage = res as ApiReturnErrorRes;
+        dispatch(setAPIError({ apiErrorMessages: errMessage.errorMessage }));
       }
     }
   };

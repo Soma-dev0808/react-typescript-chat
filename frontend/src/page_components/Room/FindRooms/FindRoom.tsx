@@ -15,7 +15,11 @@ import {
   handleScroll,
   createUrlWithQueryString,
 } from "../../../utils/utilities";
-import { ApiReturnRes, TextFormInputSize } from "../../../utils/types";
+import {
+  ApiReturnErrorRes,
+  ApiReturnRes,
+  TextFormInputSize,
+} from "../../../utils/types";
 import { en } from "../../../utils/language";
 import searchIcon from "../../../icons/searchIcon.png";
 
@@ -64,7 +68,10 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
     }
 
     try {
-      const res: ApiReturnRes = await joinRoomService({ username, roomName });
+      const res = (await joinRoomService({
+        username,
+        roomName,
+      })) as ApiReturnRes<null>;
 
       if (res.isSuccess) {
         const nextUrl: string = createUrlWithQueryString(routePath.chat, {
@@ -72,7 +79,8 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
         });
         history.push(nextUrl);
       } else {
-        dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
+        const errMsg = res as ApiReturnErrorRes;
+        dispatch(setAPIError({ apiErrorMessages: errMsg.errorMessage }));
       }
     } catch (error) {
       dispatch(setAPIError({ apiErrorMessages: en.JOIN_ROOM_ERROR }));

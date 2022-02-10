@@ -40,4 +40,11 @@ interface MessaageType {
   timeStamp?: firebase.firestore.Timestamp | string;
 }
 
-export type { UserInfoType, RoomInfoType, MessaageType };
+interface FireBaseErrorType {
+  code: string;
+  message: string;
+  name: "FirebaseError";
+  stack?: string;
+}
+
+export type { UserInfoType, RoomInfoType, MessaageType, FireBaseErrorType };

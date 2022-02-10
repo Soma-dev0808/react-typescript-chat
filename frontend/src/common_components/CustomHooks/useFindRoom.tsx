@@ -1,21 +1,19 @@
 import { useEffect, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { RoomInfoType } from "../../utils/firebase";
 import { fetchRoomList } from "../../page_components/Room/service/service";
 import useInit from "../CustomHooks/useInit";
 import { setAPIError } from "../../features/apiStatSlice";
 import { en } from "../../utils/language";
-import { SearchFilterState } from "../../utils/types";
-
-interface InitFindRoomState {
-  rooms: Array<RoomInfoType>;
-  nextRef: any;
-}
+import {
+  ApiReturnRes,
+  SearchFilterState,
+  RoomListState,
+} from "../../utils/types";
 
 interface FindRomState {
   isLoading: boolean;
-  roomList: InitFindRoomState;
+  roomList: RoomListState;
   fetchExistRooms: (
     _nextRef: any,
     filterObj: SearchFilterState,
@@ -32,18 +30,23 @@ const initialState = {
 const useFindRoom = (): FindRomState => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [roomList, setRoomList] = useState<InitFindRoomState>(initialState);
+  const [roomList, setRoomList] = useState<RoomListState>(initialState);
 
   // Fetch rooms which user can choose
   const fetchExistRooms = useCallback(
     async (_nextRef, filterObj, isReset = false) => {
       if (isReset) setRoomList(initialState);
       setIsLoading(true);
-      const res = await fetchRoomList(listFetchLimit, _nextRef, filterObj);
+      const res = (await fetchRoomList(
+        listFetchLimit,
+        _nextRef,
+        filterObj
+      )) as ApiReturnRes<RoomListState>;
+
       if (res.isSuccess) {
-        const { roomList, nextRef } = res.value;
+        const { rooms: _rooms, nextRef } = res.value!;
         setRoomList((prevState) => ({
-          rooms: prevState.rooms.concat(roomList),
+          rooms: prevState.rooms.concat(_rooms),
           nextRef: nextRef,
         }));
       } else {

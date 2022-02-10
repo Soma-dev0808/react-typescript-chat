@@ -4,7 +4,8 @@ import * as H from "history";
 import firebase from "firebase/app";
 import qs, { ParsedQs } from "qs";
 
-import { ApiReturnRes } from "../utils/types";
+import { ApiReturnResponse } from "../utils/types";
+import { FireBaseErrorType } from "../utils/firebase";
 import { ApiErrorState } from "../features/apiStatSlice";
 import { en } from "./language";
 
@@ -22,28 +23,38 @@ interface ValidateEmptyProps {
 /**
  * Convert Firebase api response
  */
-export const convertFBApiResponse = (
+export const convertFBApiResponse = <_, T>(
   isSuccess: boolean = true,
-  content: any = null
-): ApiReturnRes => {
-  return isSuccess
-    ? {
-        isSuccess,
-        value: content,
-      }
-    : {
-        isSuccess,
-        errorMessage: content,
-      };
+  content?: T
+): ApiReturnResponse<T> => {
+  // Success response
+  if (isSuccess) {
+    return {
+      isSuccess,
+      value: content,
+    };
+  }
+
+  // Error response
+  let errMsg = "";
+  if (typeof content == "string") errMsg = content;
+  return {
+    isSuccess,
+    errorMessage: errMsg,
+  };
 };
 
 /**
  * Get message of Firbase api response
  */
-export const retrieveFBErrorMessage = (err: {
-  message: string | null | undefined;
-}): string => {
-  return err?.message ? err.message : en.UNDEFINED_ERROR;
+export const retrieveFBErrorMessage = <T extends FireBaseErrorType>(
+  err: T
+): string => {
+  if (isNullOrUndefined(err)) {
+    return en.UNDEFINED_ERROR;
+  }
+
+  return err.message ? err.message : en.UNDEFINED_ERROR;
 };
 
 /**
