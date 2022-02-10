@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Room from "./Room";
 import { SubmitActionProps } from "./Room";
 import { joinRoomService } from "./service/service";
-import { ApiReturnRes } from "../../utils/types";
+import { ApiReturnResponse } from "../../utils/types";
 
 import "./Room.scss";
 
@@ -18,7 +18,10 @@ const SelectRoom: React.FC = () => {
     roomName,
     handleResCB
   ) => {
-    const res: ApiReturnRes = await joinRoomService({ username, roomName });
+    const res: ApiReturnResponse<unknown> = await joinRoomService({
+      username,
+      roomName,
+    });
     handleResCB(res);
   };
 

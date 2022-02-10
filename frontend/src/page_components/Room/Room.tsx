@@ -14,7 +14,11 @@ import {
   createUrlWithQueryString,
   validateEmptyString,
 } from "../../utils/utilities";
-import { ApiReturnRes } from "../../utils/types";
+import {
+  ApiReturnErrorRes,
+  ApiReturnRes,
+  ApiReturnResponse,
+} from "../../utils/types";
 import { en } from "../../utils/language";
 import { History } from "history";
 
@@ -24,7 +28,7 @@ export interface SubmitActionProps {
   (
     username: string,
     roomName: string,
-    callback: (res: ApiReturnRes) => void
+    callback: (res: ApiReturnResponse<unknown>) => void
   ): void;
 }
 
@@ -56,14 +60,15 @@ const Room: React.FC<Props> = ({ history, submitAction, isJoin = true }) => {
       })
     ) {
       // If validation is passed, do submit(join or create a room)
-      submitAction(username, roomName, (res) => {
+      submitAction(username, roomName, (res: ApiReturnResponse<unknown>) => {
         if (res.isSuccess) {
           const nextUrl: string = createUrlWithQueryString(routePath.chat, {
             roomName,
           });
           history.push(nextUrl);
         } else {
-          dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
+          const errMsg = res as ApiReturnErrorRes;
+          dispatch(setAPIError({ apiErrorMessages: errMsg.errorMessage }));
         }
       });
     }

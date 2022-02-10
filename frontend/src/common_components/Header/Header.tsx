@@ -12,6 +12,7 @@ import { routePath } from "../../router/router";
 import { en } from "../../utils/language";
 
 import "./Header.scss";
+import { ApiReturnErrorRes } from "../../utils/types";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Header: React.FC = () => {
     // sign out if isAuth is true.
     if (isAuth) {
       dispatch(startOrEndCallApi(true));
-      const res = await signOut();
+      const res = (await signOut()) as ApiReturnErrorRes;
       if (res?.errorMessage) {
         dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
       } else {

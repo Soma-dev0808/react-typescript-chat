@@ -7,7 +7,11 @@ import {
 import { routePath } from "../../../router/router";
 import { en } from "../../../utils/language";
 import { History } from "history";
-import { ApiReturnRes } from "../../../utils/types";
+import {
+  ApiReturnRes,
+  ApiReturnErrorRes,
+  ApiReturnResponse,
+} from "../../../utils/types";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { ApiErrorState } from "../../../features/apiStatSlice";
 import { UserInputProps } from "../../../utils/types";
@@ -26,14 +30,15 @@ export const handleSubmit = async (
 
   const submit = isSignUp ? signUp : signIn;
 
-  const res = await submit(userInput);
+  const res = (await submit(userInput)) as ApiReturnRes<null>;
 
   if (res?.isSuccess) {
     // hide loading indicator and go to create chat page
     dispatch(startOrEndCallApi(false));
     history.push(routePath.createRoom);
   } else {
-    dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
+    const errorMsg = res as ApiReturnErrorRes;
+    dispatch(setAPIError({ apiErrorMessages: errorMsg.errorMessage }));
   }
 };
 
@@ -74,11 +79,17 @@ const signIn = async ({ email, password }: Partial<UserInputProps>) => {
     .catch((err) => convertFBApiResponse(false, retrieveFBErrorMessage(err)));
 };
 
-export const signOut = async (): Promise<ApiReturnRes> => {
+export const signOut = async (): Promise<ApiReturnResponse<null>> => {
   return auth
     .signOut()
-    .then(() => convertFBApiResponse())
-    .catch((err) => convertFBApiResponse(false, retrieveFBErrorMessage(err)));
+    .then(() => convertFBApiResponse() as ApiReturnRes<null>)
+    .catch(
+      (err) =>
+        convertFBApiResponse(
+          false,
+          retrieveFBErrorMessage(err)
+        ) as ApiReturnErrorRes
+    );
 };
 
 // check username is already taken. If not, return true

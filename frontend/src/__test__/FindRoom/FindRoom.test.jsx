@@ -35,7 +35,7 @@ describe("FindRooms component render test", () => {
     const promise = Promise.resolve({
       isSuccess: true,
       value: {
-        roomList: [],
+        rooms: [],
         nextRef: -1,
       },
     });
@@ -84,7 +84,7 @@ describe("FindRooms component render test", () => {
     const promise = Promise.resolve({
       isSuccess: true,
       value: {
-        roomList: [],
+        rooms: [],
         nextRef: 1,
       },
     });
@@ -120,7 +120,7 @@ describe("FindRooms component render test", () => {
     const promise = Promise.resolve({
       isSuccess: true,
       value: {
-        roomList: [...rooms],
+        rooms: [...rooms],
         nextRef: -1,
       },
     });
