@@ -2,7 +2,9 @@
 
 #### About this app:
  
-Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room, built with React, React-Context, JavaScript, and CSS.
+Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room, built with React, React-redux, JavaScript, and CSS.
+Used Node.js for the backend, and socket.io for handling real time user status and text messaging. 
+
 
 ### Project Screen Shot(s)
 
@@ -16,7 +18,19 @@ Real time chat app allows user to communicate with other users and check realtim
 
 ## Installation and Setup Instructions
 
-Grab firebase app configuration below and place them in .env file to make app able to use firestore.
+Firebase setup:
+Please visit firebase console and create a project to get firebaseConfig. In your project setting, grab firebaseConfig and create .env file in fontend folder.
+In your .env file you can copy and past the following, then set firebaseConfig for each REACT_APP_{firebaseConfig name}.
+
+REACT_APP_API_KEY= <br>
+REACT_APP_AUTH_DOMAIN= <br>
+REACT_APP_DATABASE_URL= <br>
+REACT_APP_PROJECT_ID= <br>
+REACT_APP_STORAGE_BUCKET= <br>
+REACT_APP_MESSAGING_SENDER_ID= <br>
+REACT_APP_APP_ID= <br>
+REACT_APP_MEASUREMENT_ID= <br>
+REACT_APP_SERVER_ENDPOINT=http://localhost:5000  <br>
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 

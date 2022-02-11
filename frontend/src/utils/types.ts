@@ -1,11 +1,6 @@
-import firebase from "firebase/app";
+import { RoomInfoType, MessaageType } from "../utils/firebase";
 
-interface MessaageType {
-  user: string;
-  text: string;
-  timeStamp?: firebase.firestore.Timestamp | string;
-}
-
+// interfaces used to define a new object or method of an object.
 interface MessageArrayType extends MessaageType {
   id?: string;
 }
@@ -52,16 +47,45 @@ interface SearchFilterState {
   roomName: string;
 }
 
+// types to create functions or return values.
+interface RoomListState {
+  rooms: Array<RoomInfoType>;
+  nextRef: any;
+}
+
+type ApiReturnResponse<T> = ApiReturnRes<T> | ApiReturnErrorRes;
+
+type ApiReturnRes<T> = {
+  isSuccess: boolean;
+  value?: T;
+};
+
+type ApiReturnErrorRes = {
+  isSuccess: boolean;
+  errorMessage: string;
+};
+
+type UseRoomNameType = {
+  room: string;
+};
+
+// currently only sm available
+enum TextFormInputSize {
+  sm = "sm",
+}
+
 export { TextFormInputSize };
 
 export type {
-  MessaageType,
   MessageArrayType,
   UseChatRoomInfoType,
+  ApiReturnResponse,
+  ApiReturnErrorRes,
   ApiReturnRes,
   UseRoomNameType,
   NextRefType,
   UserInputProps,
   CurrUsers,
   SearchFilterState,
+  RoomListState,
 };

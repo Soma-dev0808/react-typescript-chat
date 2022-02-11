@@ -17,7 +17,10 @@ const CreateRoom: React.FC = () => {
     roomName,
     handleResCB
   ) => {
-    const res: ApiReturnRes = await launchRoomService({ username, roomName });
+    const res: ApiReturnRes<null> = await launchRoomService({
+      username,
+      roomName,
+    });
     // callback which whill redirect user to next page, show an error message if there's an error.
     handleResCB(res);
   };

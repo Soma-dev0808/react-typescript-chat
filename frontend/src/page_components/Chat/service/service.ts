@@ -1,10 +1,17 @@
 import firebase from "firebase/app";
 import { db, auth, UserInfoType } from "../../../utils/firebase";
 import { en } from "../../../utils/language";
-import { ApiReturnRes, MessageArrayType } from "../../../utils/types";
+import {
+  ApiReturnRes,
+  ApiReturnErrorRes,
+  MessageArrayType,
+  ApiReturnResponse,
+} from "../../../utils/types";
 import { convertFBApiResponse } from "../../../utils/utilities";
 
-export const fetchUser = async (roomName: string): Promise<ApiReturnRes> => {
+export const fetchUser = async (
+  roomName: string
+): Promise<ApiReturnResponse<UserInfoType>> => {
   const { DB_ROOM_COLLECTION, ROOM_NOT_EXISTS_ERROR, FETCH_USER_ERROR } = en;
 
   try {
@@ -14,10 +21,13 @@ export const fetchUser = async (roomName: string): Promise<ApiReturnRes> => {
       .get();
 
     if (!checkRoom.exists) {
-      return convertFBApiResponse(false, ROOM_NOT_EXISTS_ERROR);
+      return convertFBApiResponse(
+        false,
+        ROOM_NOT_EXISTS_ERROR
+      ) as ApiReturnErrorRes;
     }
 
-    const user = await checkRoom
+    const user: UserInfoType = await checkRoom
       .data()!
       .users.find(
         (user: UserInfoType) => user.email === auth.currentUser?.email
@@ -26,13 +36,13 @@ export const fetchUser = async (roomName: string): Promise<ApiReturnRes> => {
     // Save user name to reducer
     return convertFBApiResponse(true, user);
   } catch (error) {
-    return convertFBApiResponse(false, FETCH_USER_ERROR);
+    return convertFBApiResponse(false, FETCH_USER_ERROR) as ApiReturnErrorRes;
   }
 };
 
 export const fetchMessages = async (
   roomName: string
-): Promise<ApiReturnRes> => {
+): Promise<ApiReturnResponse<MessageArrayType[]>> => {
   const {
     DB_ROOM_COLLECTION,
     DB_CHAT_COLLECTION,
@@ -65,7 +75,10 @@ export const fetchMessages = async (
 
     return convertFBApiResponse(true, messageArray);
   } catch (error) {
-    return convertFBApiResponse(false, FETCH_MESSAGE_ERROR);
+    return convertFBApiResponse(
+      false,
+      FETCH_MESSAGE_ERROR
+    ) as ApiReturnErrorRes;
   }
 };
 
@@ -78,7 +91,7 @@ export const saveMessages = async ({
   message,
   room,
   username,
-}: saveMessagesArgs): Promise<ApiReturnRes> => {
+}: saveMessagesArgs): Promise<ApiReturnResponse<null>> => {
   const { DB_ROOM_COLLECTION, DB_CHAT_COLLECTION, UPDATE_MESSAGE_ERROR } = en;
 
   return db
@@ -90,6 +103,9 @@ export const saveMessages = async ({
       user: username,
       date_created: firebase.firestore.FieldValue.serverTimestamp(),
     })
-    .then(() => convertFBApiResponse())
-    .catch(() => convertFBApiResponse(false, UPDATE_MESSAGE_ERROR));
+    .then(() => convertFBApiResponse() as ApiReturnRes<null>)
+    .catch(
+      () =>
+        convertFBApiResponse(false, UPDATE_MESSAGE_ERROR) as ApiReturnErrorRes
+    );
 };
