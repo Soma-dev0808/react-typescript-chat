@@ -34,7 +34,11 @@ const useFindRoom = (): FindRomState => {
 
   // Fetch rooms which user can choose
   const fetchExistRooms = useCallback(
-    async (_nextRef, filterObj, isReset = false) => {
+    async (
+      _nextRef,
+      filterObj: SearchFilterState,
+      isReset: boolean = false
+    ) => {
       if (isReset) setRoomList(initialState);
       setIsLoading(true);
       const res = (await fetchRoomList(

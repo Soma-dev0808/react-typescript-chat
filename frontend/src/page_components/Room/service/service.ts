@@ -6,6 +6,7 @@ import {
   isNullOrUndefined,
 } from "../../../utils/utilities";
 import {
+  NextRefType,
   ApiReturnRes,
   ApiReturnErrorRes,
   ApiReturnResponse,
@@ -67,7 +68,7 @@ export const fetchRoomList = async (
     });
 
     // if data in firestore is less than 10, should stop fetch next time
-    const lastFetchedItem =
+    const lastFetchedItem: NextRefType =
       snapshot.docs.length === listFetchLimit
         ? snapshot.docs[snapshot.docs.length - 1]
         : -1;

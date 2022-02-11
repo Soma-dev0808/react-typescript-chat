@@ -11,6 +11,26 @@ interface UseChatRoomInfoType {
   setMessages: React.Dispatch<React.SetStateAction<MessageArrayType[]>>;
 }
 
+interface ApiReturnRes {
+  isSuccess: boolean;
+  value?: any;
+  errorMessage?: string;
+}
+
+interface UseRoomNameType {
+  room: string;
+}
+
+type NextRefType =
+  | number
+  | null
+  | firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>;
+
+// currently only sm available
+enum TextFormInputSize {
+  sm = "sm",
+}
+
 interface UserInputProps {
   username?: string;
   email: string;
@@ -63,6 +83,7 @@ export type {
   ApiReturnErrorRes,
   ApiReturnRes,
   UseRoomNameType,
+  NextRefType,
   UserInputProps,
   CurrUsers,
   SearchFilterState,
