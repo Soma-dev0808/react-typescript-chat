@@ -5,7 +5,11 @@ import {
   retrieveFBErrorMessage,
   isNullOrUndefined,
 } from "../../../utils/utilities";
-import { ApiReturnRes, SearchFilterState } from "../../../utils/types";
+import {
+  ApiReturnRes,
+  SearchFilterState,
+  NextRefType,
+} from "../../../utils/types";
 import { en } from "../../../utils/language";
 
 interface RoomInfo {
@@ -58,7 +62,7 @@ export const fetchRoomList = async (
     });
 
     // if data in firestore is less than 10, should stop fetch next time
-    const lastFetchedItem =
+    const lastFetchedItem: NextRefType =
       snapshot.docs.length === listFetchLimit
         ? snapshot.docs[snapshot.docs.length - 1]
         : -1;

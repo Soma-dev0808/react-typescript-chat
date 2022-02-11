@@ -26,6 +26,11 @@ interface UseRoomNameType {
   room: string;
 }
 
+type NextRefType =
+  | number
+  | null
+  | firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>;
+
 // currently only sm available
 enum TextFormInputSize {
   sm = "sm",
@@ -55,6 +60,7 @@ export type {
   UseChatRoomInfoType,
   ApiReturnRes,
   UseRoomNameType,
+  NextRefType,
   UserInputProps,
   CurrUsers,
   SearchFilterState,
