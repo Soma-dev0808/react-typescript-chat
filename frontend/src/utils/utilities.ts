@@ -21,7 +21,11 @@ interface ValidateEmptyProps {
 }
 
 /**
- * Convert Firebase api response
+ * Returns firebase api reponse as an object.
+ *
+ * @param isSuccess if api is successfully processed.
+ * @param content information or data of api response.
+ * @return An restructured object.
  */
 export const convertFBApiResponse = <_, T>(
   isSuccess: boolean = true,
@@ -45,7 +49,10 @@ export const convertFBApiResponse = <_, T>(
 };
 
 /**
- * Get message of Firbase api response
+ * Returns an error message as string.
+ *
+ * @param err error message.
+ * @return An error message.
  */
 export const retrieveFBErrorMessage = <T extends FireBaseErrorType>(
   err: T
@@ -58,10 +65,16 @@ export const retrieveFBErrorMessage = <T extends FireBaseErrorType>(
 };
 
 /**
- *  Create className conditionally
- *  Example of arguments ↓
+ *  Create className conditionally.
+ *
+ *  Example of arguments. ↓
+ *
  *  eg 1: "styled-link", "disable-link"
- *  eg 2: "styled-link", { "disable-link": true }
+ *
+ *  eg 2: "styled-link", { "disable-link": true } ← enable "disable-link" when true.
+ *
+ * @param args classnames or objects which contains condition for enabling its classname.
+ * @return A one line classname string which can be directly assign to the classname property.
  */
 export const classNames = (...args: (string | object)[]): string => {
   let className = "";
@@ -90,7 +103,11 @@ export const classNames = (...args: (string | object)[]): string => {
 };
 
 /**
- * Create url with query string passed as object
+ * Create url with query string passed as an object.
+ *
+ * @param location Url location which would be modified.
+ * @param qsObj An object contains query string.
+ * @return A new location.
  */
 export const createUrlWithQueryString = (
   location: string,

@@ -1,12 +1,11 @@
 import firebase from "firebase/app";
-import { db, auth, UserInfoType } from "../../../utils/firebase";
+import { db, auth, UserInfoType, NextRefType } from "../../../utils/firebase";
 import {
   convertFBApiResponse,
   retrieveFBErrorMessage,
   isNullOrUndefined,
 } from "../../../utils/utilities";
 import {
-  NextRefType,
   ApiReturnRes,
   ApiReturnErrorRes,
   ApiReturnResponse,
@@ -29,7 +28,7 @@ const _collection = (
 // Fetch all existing room list
 export const fetchRoomList = async (
   listFetchLimit: number,
-  nextRef: any,
+  nextRef: NextRefType,
   filterObj: SearchFilterState
 ): Promise<ApiReturnResponse<RoomListState>> => {
   const roomList: firebase.firestore.DocumentData[] = [];

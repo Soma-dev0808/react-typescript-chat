@@ -4,25 +4,26 @@ import { useDispatch } from "react-redux";
 import { fetchRoomList } from "../../page_components/Room/service/service";
 import useInit from "../CustomHooks/useInit";
 import { setAPIError } from "../../features/apiStatSlice";
-import { en } from "../../utils/language";
 import {
   ApiReturnRes,
   SearchFilterState,
   RoomListState,
 } from "../../utils/types";
+import { NextRefType } from "../../utils/firebase";
+import { en } from "../../utils/language";
 
 interface FindRomState {
   isLoading: boolean;
   roomList: RoomListState;
   fetchExistRooms: (
-    _nextRef: any,
+    _nextRef: NextRefType,
     filterObj: SearchFilterState,
     isReset?: boolean
   ) => Promise<void>;
 }
 
 const listFetchLimit = 10;
-const initialState = {
+const initialState: RoomListState = {
   rooms: [],
   nextRef: null,
 };
@@ -35,17 +36,17 @@ const useFindRoom = (): FindRomState => {
   // Fetch rooms which user can choose
   const fetchExistRooms = useCallback(
     async (
-      _nextRef,
+      _nextRef: NextRefType,
       filterObj: SearchFilterState,
       isReset: boolean = false
     ) => {
       if (isReset) setRoomList(initialState);
       setIsLoading(true);
-      const res = (await fetchRoomList(
+      const res: ApiReturnRes<RoomListState> = await fetchRoomList(
         listFetchLimit,
         _nextRef,
         filterObj
-      )) as ApiReturnRes<RoomListState>;
+      );
 
       if (res.isSuccess) {
         const { rooms: _rooms, nextRef } = res.value!;

@@ -14,11 +14,7 @@ import {
   createUrlWithQueryString,
   validateEmptyString,
 } from "../../utils/utilities";
-import {
-  ApiReturnErrorRes,
-  ApiReturnRes,
-  ApiReturnResponse,
-} from "../../utils/types";
+import { ApiReturnErrorRes, ApiReturnResponse } from "../../utils/types";
 import { en } from "../../utils/language";
 import { History } from "history";
 

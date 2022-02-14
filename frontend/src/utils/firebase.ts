@@ -40,6 +40,11 @@ interface MessaageType {
   timeStamp?: firebase.firestore.Timestamp | string;
 }
 
+type NextRefType =
+  | number
+  | null
+  | firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>;
+
 interface FireBaseErrorType {
   code: string;
   message: string;
@@ -47,4 +52,10 @@ interface FireBaseErrorType {
   stack?: string;
 }
 
-export type { UserInfoType, RoomInfoType, MessaageType, FireBaseErrorType };
+export type {
+  UserInfoType,
+  RoomInfoType,
+  MessaageType,
+  NextRefType,
+  FireBaseErrorType,
+};
