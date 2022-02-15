@@ -54,3 +54,9 @@
     outline: 0;
   }
 }
+
+@include mobile {
+  .join-outer-container {
+    height: calc(100% - 53px);
+  }
+}
