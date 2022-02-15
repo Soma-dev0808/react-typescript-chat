@@ -1,6 +1,8 @@
 const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
+const cors = require("cors");
+require("dotenv").config();
 
 const {
   addUser,
@@ -19,7 +21,7 @@ const server = http.createServer(app);
 // const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CORS_ALLOW_ORIGIN,
     methods: ["GET", "POST"],
   },
 });
@@ -83,5 +85,6 @@ io.on("connection", (socket) => {
 });
 
 app.use(router);
+app.use(cors());
 
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

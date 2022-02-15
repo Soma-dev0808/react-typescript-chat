@@ -45,4 +45,18 @@
       width: 13px;
     }
   }
+
+  @include mobile {
+    .inputbox-sm {
+      font-size: 11px;
+      height: 30px;
+    }
+
+    .button-sm {
+      padding: $p-s;
+      .common-search-form-button-image {
+        width: 9px;
+      }
+    }
+  }
 }

@@ -55,6 +55,12 @@
     color: $color-white;
   }
 
+  @include mobile {
+    .find-room-content {
+      width: 90%;
+    }
+  }
+
   .find-room-list {
     overflow-y: scroll;
     background-color: #54545473;
