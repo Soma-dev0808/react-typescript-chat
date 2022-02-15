@@ -66,4 +66,5 @@ To Visit App:
 
 please visit the link below.
 
-https://real-time-chat-cc29e.web.app/select-room
+https://real-time-chat-cc29e.web.app
+
