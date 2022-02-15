@@ -60,4 +60,10 @@ To Start Server:
 
 To Visit App: 
 
-`localhost:3000/`  
+`localhost:3000/` 
+
+## Check actual application?
+
+please visit the link below.
+
+https://real-time-chat-cc29e.web.app/select-room
