@@ -64,7 +64,9 @@ To Visit App:
 
 ## Check actual application?
 
-please visit the link below.
+Please visit the link below.
 
 https://real-time-chat-cc29e.web.app
+
+The application is hosted by firebase hosintg for frontend and heroku for backend(socket.io won't work on firebase hosting).
 
