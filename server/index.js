@@ -18,7 +18,6 @@ const router = require("./router");
 
 const app = express();
 const server = http.createServer(app);
-console.log(process.env.CORS_ALLOW_ORIGIN)
 const io = socketio(server, {
   cors: {
     origin: process.env.CORS_ALLOW_ORIGIN,
