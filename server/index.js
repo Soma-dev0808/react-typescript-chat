@@ -12,13 +12,12 @@ const {
   getUsers,
 } = require("./helper/users");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 const router = require("./router");
 
 const app = express();
 const server = http.createServer(app);
-// const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
     origin: process.env.CORS_ALLOW_ORIGIN,

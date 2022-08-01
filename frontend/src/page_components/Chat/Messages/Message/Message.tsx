@@ -30,7 +30,7 @@ const Messsage: React.FC<MessageProps> = ({
     ) : null;
 
   const timestamp: JSX.Element | null = timeStamp ? (
-    <p className="sent-time">{timeStamp}</p>
+    <p className="sent-time">{timeStamp as string}</p>
   ) : null;
 
   return isSentByCurrentUser ? (

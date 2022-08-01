@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -13,6 +13,7 @@ import { en } from "../../utils/language";
 
 import "./Header.scss";
 import { ApiReturnErrorRes } from "../../utils/types";
+import { classNames } from "../../utils/utilities";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,8 @@ const Header: React.FC = () => {
   const { isLoading, isAuth } = useAuth();
   // Set error messages observer
   useErrorMessages();
+  // チャットの場合はfixedにしない
+  const isChat = location.pathname === routePath.chat;
 
   const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -52,8 +55,13 @@ const Header: React.FC = () => {
     return authStatusButtonName;
   }, [location.pathname, isAuth]);
 
+  const _classnames = classNames(
+    "header-parent",
+    { "header-parent-fixed": !isChat },
+  );
+
   return (
-    <div className="header-parent">
+    <div className={_classnames}>
       <div className="header-bar">
         <Title />
         {!isLoading && (
