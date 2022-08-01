@@ -30,7 +30,7 @@ REACT_APP_STORAGE_BUCKET= <br>
 REACT_APP_MESSAGING_SENDER_ID= <br>
 REACT_APP_APP_ID= <br>
 REACT_APP_MEASUREMENT_ID= <br>
-REACT_APP_SERVER_ENDPOINT=http://localhost:5000  <br>
+REACT_APP_SERVER_ENDPOINT=http://localhost:5001  <br>
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 

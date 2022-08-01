@@ -2,9 +2,7 @@
 
 .outer-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: calc(100% - 53px);
   background-color: $bg-color-black;
 }
 
@@ -26,7 +24,8 @@
 
 @include mobile {
   .outer-container {
-    height: calc(100% - 53px);
+    align-items: center;
+    justify-content: center;
   }
 
   .container {

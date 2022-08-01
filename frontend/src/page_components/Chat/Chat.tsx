@@ -8,7 +8,7 @@ import { setAPIError, selectApiStatus } from "../../features/apiStatSlice";
 import InfoBar from "./InfoBar/InfoBar";
 import Input from "./Input/Input";
 import Messages from "./Messages";
-import TextContainer from "./TextContainer";
+import ChatListSideBar from "./ChatListSideBar";
 import LoadingIndicator from "../../common_components/LoadingIndicator";
 
 import useChatRoomInfo from "../../common_components/CustomHooks/useChatRoomInfo";
@@ -44,11 +44,8 @@ const Chat: React.FC<ChatProps> = (props) => {
   const [message, setMessage] = useState<string>("");
 
   const { room }: UseRoomNameType = useRoomName(props);
-  const {
-    username,
-    messages,
-    setMessages,
-  }: UseChatRoomInfoType = useChatRoomInfo(room);
+  const { username, messages, setMessages }: UseChatRoomInfoType =
+    useChatRoomInfo(room);
 
   // Start session
   useEffect(() => {
@@ -128,7 +125,9 @@ const Chat: React.FC<ChatProps> = (props) => {
   return (
     <>
       <div className="outer-container">
-        <TextContainer users={users} />
+        {/* Side bar */}
+        <ChatListSideBar />
+        {/* <TextContainer users={users} /> */}
         <div className="container">
           <InfoBar room={room} />
           <Messages messages={messages} username={username} />

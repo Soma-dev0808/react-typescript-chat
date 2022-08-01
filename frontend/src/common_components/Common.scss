@@ -4,11 +4,12 @@ $color-dark: #353535;
 $color-grey: #828282;
 $error-color: #ff5a5f;
 $default-color: #6c757d;
-$primary-color: #2979ff;
+$primary-color: #0a9b94;
 $danger-color: #dc3545;
 $bg-color-black: #1a1a1d;
 $header-color: #242526;
 $api-message-color: #353535;
+$typical-border-color: rgba(0,0,0,0.1);
 $space-xs: 5px;
 $space-s: 10px;
 $space-m: 20px;
@@ -45,7 +46,7 @@ $form-width-l: 20%;
 }
 
 @mixin desktop {
-  @media (max-width: 1200px) {
+  @media (min-width: 769px) {
     @content;
   }
 }
