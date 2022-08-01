@@ -24,7 +24,6 @@ const ChatListItem: React.FC<ChatListItemProps> = ({ roomName, users }) => {
             <span>{userNames}</span>
         );
     };
-    console.log(users && getUserNames(users));
     return (
         <div className='chat-list-item-container'>
             <span className='chat-list-item-room-name'>{roomName}</span>

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import AuthForm from "../../page_components/Auth/AuthForm/";
-import createWrapper from "../utils/createWrapper";
+// import createWrapper from "../utils/createWrapper";
 import { en } from "../../utils/language";
 
 afterEach(cleanup);
@@ -11,7 +11,7 @@ afterEach(cleanup);
 describe("Auth Form test", () => {
   test("render test", async () => {
     const { container, rerender, findAllByRole } = render(
-      <AuthForm isLogin={false} formAction={() => {}} isLoading={false} />
+      <AuthForm isLogin={false} formAction={() => { }} isLoading={false} />
     );
 
     expect(container.firstChild).not.toBe(null);
@@ -19,7 +19,7 @@ describe("Auth Form test", () => {
     let inputFields = await findAllByRole("textbox");
     expect(inputFields.length).toBe(2);
 
-    rerender(<AuthForm isLogin formAction={() => {}} isLoading={false} />);
+    rerender(<AuthForm isLogin formAction={() => { }} isLoading={false} />);
 
     inputFields = await findAllByRole("textbox");
     expect(inputFields.length).toBe(1);
