@@ -14,7 +14,7 @@ const chatList = () => {
     }));
   };
 
-  return [...new Array(5)].map((_, idx) => ({
+  return [...new Array(20)].map((_, idx) => ({
     date_created: { seconds: new Date().getTime() + idx } as FBTimeStamp,
     roomName: `chat room ${idx}`,
     users: getUserNames(idx)

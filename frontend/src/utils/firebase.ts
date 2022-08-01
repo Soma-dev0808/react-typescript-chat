@@ -1,8 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import dotenv from "dotenv";
-dotenv.config();
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -28,8 +26,10 @@ interface UserInfoType {
   name: string;
 }
 
+type FBTimeStamp = firebase.firestore.Timestamp;
+
 interface RoomInfoType {
-  date_created: firebase.firestore.Timestamp;
+  date_created: FBTimeStamp;
   roomName: string;
   users: UserInfoType[];
 }
@@ -37,7 +37,7 @@ interface RoomInfoType {
 interface MessaageType {
   user: string;
   text: string;
-  timeStamp?: firebase.firestore.Timestamp | string;
+  timeStamp?: FBTimeStamp | string;
 }
 
 type NextRefType =
@@ -57,5 +57,6 @@ export type {
   RoomInfoType,
   MessaageType,
   NextRefType,
+  FBTimeStamp,
   FireBaseErrorType,
 };
