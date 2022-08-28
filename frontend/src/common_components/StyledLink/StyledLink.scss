@@ -2,8 +2,14 @@
 
 .link-container {
   margin-top: $space-m;
+
   .styled-link {
-    color: $color-white;
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .disable-link {

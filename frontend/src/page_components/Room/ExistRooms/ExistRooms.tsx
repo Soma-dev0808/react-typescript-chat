@@ -27,6 +27,7 @@ const ExistRoom: React.FC<Props> = ({ room, buttonAction }) => {
           size="sm"
           primary
           onClickEvent={handleButtonClick}
+          textBold
         />
       </div>
     </>

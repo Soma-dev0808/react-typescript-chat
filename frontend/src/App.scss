@@ -1,10 +1,11 @@
 @import "./common_components/Common.scss";
+
 html,
 body {
   font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
-  background-color: $bg-color-black;
+  background-color: $color-white;
 }
 
 #root {

@@ -1,0 +1,62 @@
+@import './Common.scss';
+
+@mixin h1FormTitleBase {
+    color: $primary-color;
+    font-size: 2.5em;
+    padding-bottom: $space-s;
+    border-bottom: $hTagBorder;
+}
+
+@mixin formInputBase {
+    border: none;
+    border: 1px solid $color-dark;
+    border-radius: 5px;
+    padding: 15px 20px;
+    width: 100%;
+
+    &:focus {
+        border: 1px solid $primary-color;
+    }
+}
+
+@mixin customButtonColorBase($base-color, $base-hover-color) {
+    background: $base-color;
+
+    &:hover {
+        background-color: $base-hover-color;
+    }
+
+    &-variant {
+        border: 1.5px solid white;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: white;
+            color: $base-color;
+        }
+    }
+}
+
+@mixin desktopL {
+    @media (min-width: 901px) {
+        @content;
+    }
+}
+
+@mixin desktopS {
+    @media (max-width: 900px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+}

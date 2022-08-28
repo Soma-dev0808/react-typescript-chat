@@ -1,4 +1,5 @@
 @import "../../../common_components/Common.scss";
+@import "../../../common_components/mixin";
 
 .info-bar {
   display: flex;
@@ -39,7 +40,6 @@
     align-items: center;
     border: none;
     width: 60px;
-    background-color: $primary-color;
   }
 
   &-users-icon {

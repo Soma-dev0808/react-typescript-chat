@@ -41,6 +41,7 @@ const InfoBar: React.FC<InfoBarState> = ({ room, users, activeUsers }) => {
             onClickEvent={handleShowActiveUser}
             classnames="right-inner-users-button"
             buttonShadow
+            primary
             buttonText={
               (
                 <>

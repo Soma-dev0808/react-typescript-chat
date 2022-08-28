@@ -114,6 +114,9 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
               size="xs"
               onClickEvent={handleClose}
               buttonText={en.CLOSE}
+              primary
+              variant
+              textBold
             />
           </div>
         </div>
@@ -128,6 +131,16 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
           ))}
 
           {isLoading && <NoWrapLoadingIndicator />}
+
+          {
+            !isLoading &&
+            !roomList.rooms.length &&
+            (
+              <div className="find-room-no-result">
+                {en.NO_RESULT}
+              </div>
+            )
+          }
         </div>
       </div>
     </div>

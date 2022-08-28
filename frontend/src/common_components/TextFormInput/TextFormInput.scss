@@ -1,4 +1,5 @@
 @import "../Common.scss";
+@import "../mixin";
 
 .common-search-form {
   display: flex;
@@ -26,6 +27,10 @@
     width: 20%;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+
+    &:hover {
+      background-color: #266fed;
+    }
   }
 
   .common-search-form-button-image {
@@ -54,6 +59,7 @@
 
     .button-sm {
       padding: $p-s;
+
       .common-search-form-button-image {
         width: 9px;
       }

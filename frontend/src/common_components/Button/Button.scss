@@ -1,24 +1,31 @@
 @import "../Common.scss";
+@import "../mixin";
 
 .custom-button {
   color: $color-white;
   text-transform: uppercase;
   text-decoration: none;
-  background: $default-color;
   padding: $space-m;
   border-radius: 5px;
   display: inline-block;
   border: none;
   width: 100%;
   cursor: pointer;
+  transition: 0.3s;
+
+  @include customButtonColorBase($default-color, $default-dark-color);
 }
 
 .button-primary {
-  background: $primary-color;
+  @include customButtonColorBase($primary-color, $primary-dark-color);
 }
 
 .button-danger {
-  background: $danger-color;
+  @include customButtonColorBase($danger-color, $danger-dark-color);
+}
+
+.button-text-bold {
+  font-weight: bold;
 }
 
 .button-xs {
@@ -43,6 +50,7 @@
   width: 10em;
   height: 10em;
 }
+
 .button-loading-indicator {
   display: inline-block;
   width: 20px;
@@ -59,6 +67,7 @@
     -webkit-transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg);

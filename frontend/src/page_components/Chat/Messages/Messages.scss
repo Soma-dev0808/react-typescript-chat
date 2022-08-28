@@ -1,4 +1,5 @@
 @import "../../../common_components/Common.scss";
+@import "../../../common_components/mixin";
 
 .messages {
   padding: 2% 0;
@@ -53,6 +54,7 @@
     opacity: 0;
     visibility: hidden;
   }
+
   100% {
     opacity: 1;
     visibility: visible;
@@ -63,6 +65,7 @@
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     visibility: hidden;

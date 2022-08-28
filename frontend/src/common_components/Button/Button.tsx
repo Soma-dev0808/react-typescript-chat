@@ -7,6 +7,8 @@ interface ButtonProps {
   size?: string | null;
   primary?: boolean;
   danger?: boolean;
+  textBold?: boolean;
+  variant?: boolean;
   classnames?: string; // pass class name as usual.
   buttonType?: "button" | "submit" | "reset" | undefined;
   isDisabled?: boolean;
@@ -21,6 +23,8 @@ const Button: React.FC<ButtonProps> = ({
   size = null,
   primary = false,
   danger = false,
+  textBold = false,
+  variant = false,
   classnames = "",
   buttonType = "button",
   isDisabled = false,
@@ -32,8 +36,12 @@ const Button: React.FC<ButtonProps> = ({
   const _classnames = classNames(
     "custom-button",
     classnames,
+    { "custom-button-variant": !primary && !danger && variant },
     { "button-primary": primary },
+    { "button-primary-variant": primary && variant },
     { "button-danger": danger },
+    { "button-danger-variant": danger && variant },
+    { "button-text-bold": textBold },
     { "button-xs": size === "xs" },
     { "button-sm": size === "sm" },
     { "button-lg": size === "lg" },

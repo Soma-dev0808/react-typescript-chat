@@ -1,52 +1,59 @@
 @import "../../../common_components/Common.scss";
+@import "../../../common_components/mixin";
 
-.find-room-container {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation-name: animateModal;
-  animation-duration: 0.5s;
+.find-room {
 
-  @keyframes animateModal {
-    0% {
-      opacity: 0;
-    }
+  &-container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: animateModal;
+    animation-duration: 0.5s;
 
-    100% {
-      opacity: 1;
+    @keyframes animateModal {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
   }
 
-  .find-room-modal-header {
+
+  &-modal-header {
+    background-color: $primary-color;
+    border-radius: 10px 10px 0 0;
     border-bottom: 1px solid $color-white;
     padding: $p-m $p-l;
     display: flex;
     align-items: center;
-
-    .find-room-modal-title {
-      flex-grow: 1;
-      text-align: left;
-    }
-
-    .find-room-search-area {
-      width: 35%;
-    }
-
-    .find-room-close-button {
-      margin-left: $p-l;
-    }
   }
 
-  .find-room-content {
-    background-color: #1a1a1de6;
+  &-modal-title {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  &-search-area {
+    width: 35%;
+  }
+
+  &-close-button {
+    margin-left: $p-l;
+  }
+
+  &-content {
+    background-color: white;
     width: 60%;
     height: 70%;
     border-radius: 10px;
@@ -57,32 +64,37 @@
   }
 
   @include mobile {
-    .find-room-content {
+    &-content {
       width: 90%;
     }
   }
 
-  .find-room-list {
+  &-list {
     overflow-y: scroll;
-    background-color: #54545473;
+    color: $dark-text-color;
+    font-weight: bold;
   }
 
-  .find-room-avoid-scroll {
+  &-avoid-scroll {
     overflow: hidden;
   }
 
-  .find-room-list-item {
+  &-list-item {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid $color-white;
+    border-bottom: 1px solid $typical-border-color;
+  }
 
-    .find-room-info {
-      flex-grow: 1;
-      padding: $p-l;
-    }
+  &-info {
+    flex-grow: 1;
+    padding: $p-l;
+  }
 
-    .find-room-join-button {
-      padding: $p-l;
-    }
+  &-join-button {
+    padding: $p-l;
+  }
+
+  &-no-result {
+    color: $color-grey;
   }
 }

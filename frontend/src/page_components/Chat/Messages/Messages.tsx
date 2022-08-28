@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import firebase from "firebase/app";
 import Message from "./Message/Message";
 import ScrollToBottomButton from "../../../common_components/ScrollBottomButton";
 import { MessageArrayType } from "../../../utils/types";
 
 import {
   generateKey,
-  convertTsToTime,
   handleScroll,
   scrollToBottom,
 } from "../../../utils/utilities";

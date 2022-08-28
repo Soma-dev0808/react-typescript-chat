@@ -2,7 +2,7 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import createWrapper from "../utils/createWrapper";
 import { getErrorMessages } from "../utils/utilities";
-import ApiResponseBar from "../../common_components/Header/ApiResponseBar/ApiResponseBar";
+import ApiResponseBar from "../../common_components/ApiResponseBar/ApiResponseBar";
 
 afterEach(cleanup);
 const { wrapper, mockValues } = createWrapper();

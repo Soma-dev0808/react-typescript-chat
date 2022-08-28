@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearError, selectApiStatus } from "../../../features/apiStatSlice";
-import Button from "../../Button/Button";
+import { clearError, selectApiStatus } from "../../features/apiStatSlice";
+import Button from "../Button/Button";
+import useErrorMessages from "../CustomHooks/useErrorMessages";
 
 import "./ApiResponseBar.scss";
 
@@ -9,6 +10,9 @@ const ApiResponseBar: React.FC = () => {
   const dispatch = useDispatch();
   const { apiErrorMessages } = useSelector(selectApiStatus);
   let errorMessages: Array<string> = [];
+
+  // Set error messages observer
+  useErrorMessages();
 
   // clear error button
   const handleClearError = () => dispatch(clearError());
@@ -30,7 +34,14 @@ const ApiResponseBar: React.FC = () => {
         </ul>
       </div>
       <div>
-        <Button size="xs" onClickEvent={handleClearError} buttonText={"x"} />
+        <Button
+          size="xs"
+          onClickEvent={handleClearError}
+          buttonText={"x"}
+          textBold
+          danger
+          variant
+        />
       </div>
     </div>
   ) : null;
