@@ -1,4 +1,4 @@
-import { RoomInfoType, MessaageType, NextRefType } from "../utils/firebase";
+import { RoomInfoType, MessaageType, NextRefType, UserInfoType } from "../utils/firebase";
 
 // interfaces used to define a new object or method of an object.
 interface MessageArrayType extends MessaageType {
@@ -6,7 +6,8 @@ interface MessageArrayType extends MessaageType {
 }
 
 interface UseChatRoomInfoType {
-  username: string;
+  userInfo: UserInfoType | null;
+  users: UserInfoType[],
   messages: MessageArrayType[];
   setMessages: React.Dispatch<React.SetStateAction<MessageArrayType[]>>;
 }
@@ -20,11 +21,13 @@ interface UserInputProps {
 interface CurrUsers {
   id: number;
   name: string;
+  email: string;
   room: string;
 }
 
 interface SearchFilterState {
-  roomName: string;
+  roomName?: string;
+  isPersonal?: boolean,
 }
 
 // types to create functions or return values.

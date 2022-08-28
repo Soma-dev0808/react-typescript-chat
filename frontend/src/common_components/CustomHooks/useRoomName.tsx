@@ -5,11 +5,8 @@ import { retrieveQsObjProp } from "../../utils/utilities";
 import { UseRoomNameType } from "../../utils/types";
 import { Location } from "history";
 
-interface useRoomNameProps {
-  location: Location;
-}
-
-const useRoomName = ({ location }: useRoomNameProps): UseRoomNameType => {
+// get room name from location.
+const useRoomName = (location: Location): UseRoomNameType => {
   const history = useHistory();
   const [room, setRoom] = useState<string>("");
 

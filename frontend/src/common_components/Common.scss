@@ -5,11 +5,18 @@ $color-grey: #828282;
 $error-color: #ff5a5f;
 $default-color: #6c757d;
 $primary-color: #0a9b94;
+$secondary-color: #efede0;
 $danger-color: #dc3545;
 $bg-color-black: #1a1a1d;
 $header-color: #242526;
 $api-message-color: #353535;
 $typical-border-color: rgba(0,0,0,0.1);
+$background-white-gray: #f5f5f5;
+
+// text color
+$dark-text-color: #3c4a60;
+$disable-text-color: rgba(60,74,96,0.5);
+
 $space-xs: 5px;
 $space-s: 10px;
 $space-m: 20px;
@@ -20,6 +27,11 @@ $p-l: 16px;
 $form-width-s: 90%;
 $form-width-m: 60%;
 $form-width-l: 20%;
+
+// shadow
+$layer1-boxshadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+$layer2-boxshadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+$layer3-boxshadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 .mt-10 {
   margin-top: $space-s;

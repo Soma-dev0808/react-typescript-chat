@@ -23,8 +23,9 @@ export const en = {
   SOCKET_SEND_MESSAGE: "sendMessage",
   // Error messagess
   FETCH_USER_ERROR: "Fetch User Error",
+  FETCH_USER_ERROR_NO_EMAIL: "Fetch User Error: No email address is set",
   FETCH_DATA_ERROR: "There's something wrong with fetching data",
-  ROOM_ALREADY_EXISTS_ERROR: "Room is already exist",
+  ROOM_ALREADY_EXISTS_ERROR: "Room name is already taken",
   ROOM_NOT_EXISTS_ERROR: "Room does not exists",
   ROOM_NAME_ALREADY_EXISTS_ERROR: "This room name is already taken",
   CREATE_ROOM_ERROR: "Creatting Room Error",

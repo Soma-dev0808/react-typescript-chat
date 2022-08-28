@@ -11,8 +11,9 @@ interface ButtonProps {
   buttonType?: "button" | "submit" | "reset" | undefined;
   isDisabled?: boolean;
   onClickEvent?: React.MouseEventHandler<HTMLButtonElement>;
-  buttonText: string;
+  buttonText: string | React.ReactNode;
   isLoading?: boolean;
+  buttonShadow?: boolean;
 }
 
 // common use button props
@@ -23,9 +24,10 @@ const Button: React.FC<ButtonProps> = ({
   classnames = "",
   buttonType = "button",
   isDisabled = false,
-  onClickEvent = () => {},
+  onClickEvent = () => { },
   buttonText = "",
   isLoading = false,
+  buttonShadow = false,
 }) => {
   const _classnames = classNames(
     "custom-button",
@@ -34,7 +36,8 @@ const Button: React.FC<ButtonProps> = ({
     { "button-danger": danger },
     { "button-xs": size === "xs" },
     { "button-sm": size === "sm" },
-    { "button-lg": size === "lg" }
+    { "button-lg": size === "lg" },
+    { "button-shadow": buttonShadow }
   );
 
   return (

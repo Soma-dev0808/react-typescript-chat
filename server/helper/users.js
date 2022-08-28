@@ -1,6 +1,6 @@
 const users = [];
 
-const addUser = ({ id, username, room }) => {
+const addUser = ({ id, username, userEmail, room }) => {
   username = username.trim().toLowerCase();
   room = room.trim().toLowerCase();
 
@@ -8,7 +8,7 @@ const addUser = ({ id, username, room }) => {
     (user) => user.name === username && user.room === room
   );
 
-  const user = { id, name: username, room };
+  const user = { id, name: username, email: userEmail, room };
 
   if (existingUser === -1) {
     users.push(user);

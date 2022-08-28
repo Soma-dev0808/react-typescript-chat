@@ -6,6 +6,7 @@ import { routePath } from "../../../router/router";
 import ExistRooms from "../ExistRooms";
 import Button from "../../../common_components/Button/Button";
 import TextFormInput from "../../../common_components/TextFormInput";
+import NoWrapLoadingIndicator from "../../../common_components/NoWrapLoadingIndicator";
 import useAuth from "../../../common_components/CustomHooks/useAuth";
 import useFindRoom from "../../../common_components/CustomHooks/useFindRoom";
 import { setAPIError } from "../../../features/apiStatSlice";
@@ -117,7 +118,7 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
           </div>
         </div>
         <div className="find-room-list" onScroll={handleListScroll}>
-          {roomList?.rooms?.map((room, i) => (
+          {roomList.rooms.map((room, i) => (
             <div
               key={room?.date_created?.seconds || generateKey(i)}
               className="find-room-list-item"
@@ -126,7 +127,7 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
             </div>
           ))}
 
-          {isLoading && <div className="nowrapp-loading-indicator"></div>}
+          {isLoading && <NoWrapLoadingIndicator />}
         </div>
       </div>
     </div>

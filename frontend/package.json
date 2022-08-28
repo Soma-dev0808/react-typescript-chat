@@ -36,7 +36,11 @@
     "extends": "react-app",
     "rules": {
       "no-unused-vars": 0,
-      "@typescript-eslint/no-unused-vars": 0
+      "@typescript-eslint/no-unused-vars": 0,
+      "semi": [
+        "error",
+        "always"
+      ]
     }
   },
   "browserslist": {

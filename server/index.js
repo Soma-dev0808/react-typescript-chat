@@ -26,8 +26,8 @@ const io = socketio(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join", ({ username, room }, callback) => {
-    const { err, user } = addUser({ id: socket.id, username, room });
+  socket.on("join", ({ username, userEmail, room }, callback) => {
+    const { err, user } = addUser({ id: socket.id, username, userEmail, room });
 
     if (err) return callback({ err });
 
@@ -75,11 +75,16 @@ io.on("connection", (socket) => {
     const user = removeUser(socket.id);
 
     socket.disconnect();
-    if (user)
+    if (user) {
       io.to(user.room).emit("message", {
         user: "admin",
         text: `${user.name} has left room`,
       });
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
+    }
   });
 });
 

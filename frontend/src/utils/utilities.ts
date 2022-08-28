@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 import qs, { ParsedQs } from "qs";
 
 import { ApiReturnResponse } from "../utils/types";
-import { FireBaseErrorType } from "../utils/firebase";
+import { FireBaseErrorType, UserInfoType } from "../utils/firebase";
 import { ApiErrorState } from "../features/apiStatSlice";
 import { en } from "./language";
 
@@ -218,8 +218,8 @@ const _adjustTimeString = (timeNum: number): string => {
  */
 export const handleScroll = (
   e: React.UIEvent<HTMLDivElement>,
-  bottomActionCB = (bool: boolean) => {},
-  topActionCB = (bool: boolean) => {}
+  bottomActionCB = (bool: boolean) => { },
+  topActionCB = (bool: boolean) => { }
 ): void => {
   const { scrollHeight, scrollTop, clientHeight } = e.target as HTMLDivElement;
 
@@ -262,3 +262,27 @@ export const isNullOrUndefined = (value: any): boolean => {
   }
   return false;
 };
+
+/**
+ * Return usernames as a chat information.
+ * 
+ * @param {UserInfoType[]} users error message.
+ * @return {string}
+ */
+export const getUserNames = (users: UserInfoType[]): string => {
+  let userNames = '';
+  let count = 0;
+  for (let user of users) {
+    if (count === 2) {
+      userNames += `, +${users.length - 2}`;
+      break;
+    }
+
+    if (count !== 0) userNames += ',';
+    userNames += user.name;
+    count += 1;
+  };
+
+  return userNames;
+};
+

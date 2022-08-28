@@ -35,25 +35,26 @@ interface ChatProps {
   location: Location;
 }
 
-const Chat: React.FC<ChatProps> = (props) => {
+const Chat: React.FC<ChatProps> = ({ location }) => {
   const dispatch = useDispatch();
   const { isApiLoading } = useSelector(selectApiStatus);
 
   // states
-  const [users, setUsers] = useState<CurrUsers[]>([]);
+  const [activeUsers, setActiveUsers] = useState<CurrUsers[]>([]);
   const [message, setMessage] = useState<string>("");
 
-  const { room }: UseRoomNameType = useRoomName(props);
-  const { username, messages, setMessages }: UseChatRoomInfoType =
-    useChatRoomInfo(room);
+  const { room }: UseRoomNameType = useRoomName(location);
+  const { userInfo, users, messages, setMessages }: UseChatRoomInfoType = useChatRoomInfo(room);
+  const username = userInfo?.name;
+  const userEmail = userInfo?.email;
 
   // Start session
   useEffect(() => {
     socket = io(ENDPOINT);
-    if (username && room) {
+    if (username && userEmail && room) {
       socket.emit(
         en.SOCKET_JOIN,
-        { username, room }
+        { username, userEmail, room }
         // Currently no error return from BE
         //   (err) => {
         //   if (err) {
@@ -62,20 +63,30 @@ const Chat: React.FC<ChatProps> = (props) => {
         // }
       );
     }
-  }, [username, room]);
+  }, [username, userEmail, room]);
 
   // Start listening message from server and room data
   useEffect(() => {
     if (username) {
-      socket.on(en.SOCKET_MESSAGE, (message: MessageArrayType) => {
-        setMessages((prev) => prev.concat(message));
+      socket.on(en.SOCKET_MESSAGE, async (message: MessageArrayType) => {
+        // Make a delay to display a user enter or leave message.
+        setTimeout(() => {
+          setMessages((prev) => prev.concat(message));
+        }, 300);
       });
 
       socket.on(en.SOCKET_ROOM_DATA, ({ users }: { users: CurrUsers[] }) => {
-        setUsers(users);
+        setActiveUsers(users);
       });
     }
-  }, [username, setMessages]);
+  }, [username, room, setMessages, setActiveUsers]);
+
+  useEffect(() => {
+    return () => {
+      setMessages([]);
+      setActiveUsers([]);
+    };
+  }, [room, setMessages]);
 
   useEffect(() => {
     window.onbeforeunload = function (e: BeforeUnloadEvent) {
@@ -90,7 +101,7 @@ const Chat: React.FC<ChatProps> = (props) => {
       socket.off();
       window.onbeforeunload = null;
     };
-  }, []);
+  }, [room]);
 
   // send input message
   const sendMessage = async (
@@ -124,13 +135,13 @@ const Chat: React.FC<ChatProps> = (props) => {
 
   return (
     <>
-      <div className="outer-container">
+      <div className="chat-outer-container">
         {/* Side bar */}
         <ChatListSideBar />
-        {/* <TextContainer users={users} /> */}
-        <div className="container">
-          <InfoBar room={room} />
-          <Messages messages={messages} username={username} />
+        {/* <TextContainer activeUsers={activeUsers} /> */}
+        <div className="chat-container">
+          <InfoBar room={room} users={users} activeUsers={activeUsers} />
+          <Messages messages={messages} username={username ?? ''} />
           <Input
             message={message}
             handleInput={handleInput}

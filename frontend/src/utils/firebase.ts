@@ -24,6 +24,7 @@ export { auth, db };
 interface UserInfoType {
   email: string;
   name: string;
+  isOnline?: boolean;
 }
 
 type FBTimeStamp = firebase.firestore.Timestamp;
@@ -38,6 +39,7 @@ interface MessaageType {
   user: string;
   text: string;
   timeStamp?: FBTimeStamp | string;
+  dateInfo?: string;
 }
 
 type NextRefType =
