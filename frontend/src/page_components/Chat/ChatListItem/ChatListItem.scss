@@ -7,10 +7,20 @@
         flex-direction: column;
         height: 80px;
         border-bottom: 1px solid $typical-border-color;
+        padding: 0px 5px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #f6f6f6;
+        }
     }
 
     &-room-name {
-        color: #3c4a60;
-        font-size: 20px;
+        color: $dark-text-color;
+        font-size: 18px;
+    }
+
+    &-attendees {
+        color: $dark-text-color;
     }
 }

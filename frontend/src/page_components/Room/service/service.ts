@@ -1,5 +1,11 @@
 import firebase from "firebase/app";
-import { db, auth, UserInfoType, NextRefType } from "../../../utils/firebase";
+import {
+  db,
+  auth,
+  UserInfoType,
+  NextRefType,
+  FireBaseErrorType
+} from "../../../utils/firebase";
 import {
   convertFBApiResponse,
   retrieveFBErrorMessage,
@@ -18,7 +24,6 @@ interface RoomInfo {
   username: string;
   roomName: string;
 }
-
 const _collection = (
   collectionName: string
 ): firebase.firestore.Query<firebase.firestore.DocumentData> => {
@@ -29,16 +34,28 @@ const _collection = (
 export const fetchRoomList = async (
   listFetchLimit: number,
   nextRef: NextRefType,
-  filterObj: SearchFilterState
+  filterObj?: SearchFilterState,
 ): Promise<ApiReturnResponse<RoomListState>> => {
   const roomList: firebase.firestore.DocumentData[] = [];
   let query = _collection(en.ROOMS);
 
-  if (filterObj?.roomName) {
-    query = query
-      .where("roomName", ">=", filterObj?.roomName)
-      .where("roomName", "<=", filterObj?.roomName + "z")
-      .orderBy("roomName");
+  if (filterObj) {
+
+    if (filterObj.isPersonal && auth.currentUser) {
+      query = query
+        .where(
+          "userIds",
+          "array-contains",
+          auth.currentUser?.uid
+        );
+    }
+
+    if (filterObj.roomName) {
+      query = query
+        .where("roomName", ">=", filterObj?.roomName)
+        .where("roomName", "<=", filterObj?.roomName + "z")
+        .orderBy("roomName");
+    }
   }
 
   query = query.orderBy(en.DATE_CREATED);
@@ -71,6 +88,7 @@ export const fetchRoomList = async (
       snapshot.docs.length === listFetchLimit
         ? snapshot.docs[snapshot.docs.length - 1]
         : -1;
+
     return convertFBApiResponse(true, {
       rooms: roomList,
       nextRef: lastFetchedItem,
@@ -78,7 +96,7 @@ export const fetchRoomList = async (
   } catch (err) {
     return convertFBApiResponse(
       false,
-      retrieveFBErrorMessage(err)
+      retrieveFBErrorMessage(err as FireBaseErrorType)
     ) as ApiReturnErrorRes;
   }
 };
@@ -115,6 +133,7 @@ export const launchRoomService = async ({
           email: auth.currentUser.email,
         },
       ],
+      userIds: [auth.currentUser.uid],
       roomName,
       date_created: firebase.firestore.FieldValue.serverTimestamp(),
     })
@@ -143,6 +162,7 @@ export const joinRoomService = async ({ username, roomName }: RoomInfo) => {
     }
 
     const usersArray = await checkRoom.data()?.users;
+    const userIdsArray = await checkRoom.data()?.userIds;
     const dateCreated = await checkRoom.data()?.date_created;
 
     const user = await checkRoom.data()?.users.find((user: UserInfoType) => {
@@ -155,7 +175,7 @@ export const joinRoomService = async ({ username, roomName }: RoomInfo) => {
     }
 
     // Check if user already joined the room before
-    // If not, redirect to select user name page
+    // If not, add user.
     if (user) {
       return convertFBApiResponse();
     } else {
@@ -170,6 +190,7 @@ export const joinRoomService = async ({ username, roomName }: RoomInfo) => {
               email: auth.currentUser.email,
             },
           ],
+          userIds: [...userIdsArray, auth.currentUser.uid],
           roomName,
           date_created: dateCreated,
         })
@@ -179,6 +200,6 @@ export const joinRoomService = async ({ username, roomName }: RoomInfo) => {
         );
     }
   } catch (error) {
-    return convertFBApiResponse(false, retrieveFBErrorMessage(error));
+    return convertFBApiResponse(false, retrieveFBErrorMessage(error as FireBaseErrorType));
   }
 };

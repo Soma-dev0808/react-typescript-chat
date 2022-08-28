@@ -1,3 +1,5 @@
+@import '../../../common_components/Common.scss';
+
 .chat-input-form {
   display: flex;
   border-top: 2px solid #d3d3d3;
@@ -6,7 +8,7 @@
 .chat-input {
   border: none;
   border-radius: 0;
-  padding: 5%;
+  padding: 3%;
   width: 80%;
   font-size: 1.2em;
 }
@@ -19,12 +21,18 @@ select:focus {
 
 .sendButton {
   cursor: pointer;
-  color: #fff !important;
+  color: $color-white;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
+  background: $primary-color;
   padding: 20px;
   display: inline-block;
   border: none;
   width: 20%;
+}
+
+@include mobile {
+  .chat-input {
+    padding: 5%;
+  }
 }

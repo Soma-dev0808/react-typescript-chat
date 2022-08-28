@@ -50,19 +50,23 @@ const Messages: React.FC<MessagesProps> = ({ messages, username }) => {
           let dateLabel: string = "";
 
           // show date when the date is different from the previous time date
-          if (typeof message?.timeStamp === "object") {
-            const ts: firebase.firestore.Timestamp = message.timeStamp;
+          if (message?.dateInfo) {
 
-            const convertedTime: string = convertTsToTime(ts);
-            message.timeStamp = convertedTime;
+            // ↓ is commented because the firebase timestamp object automatically converted to string. Idkw
+            // const ts: firebase.firestore.Timestamp = message.timeStamp;
 
-            // Set date information.
-            const _timeStamp: string = new Date(
-              ts?.toDate()
-            )?.toLocaleDateString();
+            // const convertedTime: string = convertTsToTime(ts);
+            // message.timeStamp = convertedTime;
 
-            if (prevDate !== _timeStamp) {
-              dateLabel = _timeStamp;
+            // // Set date information.
+            // const _timeStamp: string = new Date(
+            //   ts?.toDate()
+            // )?.toLocaleDateString();
+
+            const dateInfo = message.dateInfo;
+
+            if (prevDate !== dateInfo) {
+              dateLabel = dateInfo;
               prevDate = dateLabel;
             }
           }

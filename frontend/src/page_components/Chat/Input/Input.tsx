@@ -15,7 +15,7 @@ const Input: React.FC<InputState> = ({ message, handleInput, sendMessage }) => {
       <input
         className="chat-input"
         type="text"
-        placeholder="Type a messag ..."
+        placeholder="Type a message ..."
         value={message}
         onChange={handleInput}
       />

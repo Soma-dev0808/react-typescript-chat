@@ -1,0 +1,75 @@
+@import "../../../common_components/Common.scss";
+
+.chat-users {
+  &-statuses {
+    position: absolute;
+    background-color: #fff;
+    width: 250px;
+    top: 35px;
+    right: 0px;
+    max-height: 150px;
+    overflow-y: scroll;
+    box-shadow: $layer3-boxshadow;
+    display: none;
+    animation: growDown 200ms ease-in forwards;
+    transform-origin: top center;
+    border-radius: 4px;
+  }
+
+  @keyframes growDown {
+    0% {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scaleY(1);
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &-statuses-show {
+    display: block;
+  }
+
+  &-status {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid $typical-border-color;
+  }
+
+  &-user-name-container {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+  }
+
+  &-online-icon {
+    width: 7px;
+    height: 7px;
+    margin-right: 5px;
+  }
+
+  &-user-name {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #3c4a60;
+    font-weight: 600;
+  }
+
+  &-online {
+    color: $dark-text-color;
+  }
+
+  &-offline {
+    color: $disable-text-color;
+  }
+}

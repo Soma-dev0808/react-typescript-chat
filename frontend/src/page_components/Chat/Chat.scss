@@ -1,24 +1,30 @@
 @import "../../common_components/Common.scss";
 
-.outer-container {
-  display: flex;
-  height: calc(100% - 53px);
-  background-color: $bg-color-black;
-}
+.chat {
+    &-outer-container {
+      display: flex;
+      height: calc(100% - 53px);
+      background-color: $bg-color-black;
+    }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: $color-white;
-  border-radius: 8px;
-  height: 100%;
-  width: 100%;
-}
+    &-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: $background-white-gray;
+      box-shadow: $layer3-boxshadow;
+      height: 100%;
+      width: 100%;
+    }
 
-@include mobile {
-  .outer-container {
-    align-items: center;
-    justify-content: center;
-  }
+    @include mobile {
+      &-outer-container {
+        align-items: center;
+        justify-content: center;
+      }
+    
+      &-container {
+        border-radius: 8px;
+      }
+    }
 }

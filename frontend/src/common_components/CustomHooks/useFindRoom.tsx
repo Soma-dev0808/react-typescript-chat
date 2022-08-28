@@ -28,7 +28,7 @@ const initialState: RoomListState = {
   nextRef: null,
 };
 
-const useFindRoom = (): FindRomState => {
+const useFindRoom = (isPersonal = false): FindRomState => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [roomList, setRoomList] = useState<RoomListState>(initialState);
@@ -41,7 +41,9 @@ const useFindRoom = (): FindRomState => {
       isReset: boolean = false
     ) => {
       if (isReset) setRoomList(initialState);
+
       setIsLoading(true);
+
       const res: ApiReturnRes<RoomListState> = await fetchRoomList(
         listFetchLimit,
         _nextRef,
@@ -63,15 +65,12 @@ const useFindRoom = (): FindRomState => {
   );
 
   // custom hook to fetch roomlist during initial loading.
-  useInit(fetchExistRooms, roomList.nextRef, {});
+  const initialFilter = isPersonal ? { isPersonal } : {};
+  useInit(fetchExistRooms, roomList.nextRef, initialFilter);
 
   // unset roomList when unmounting
   useEffect(() => {
-    const resetState = () => {
-      setRoomList(initialState);
-    };
-
-    return () => resetState();
+    return () => setRoomList(initialState);
   }, []);
 
   return { isLoading, roomList, fetchExistRooms };

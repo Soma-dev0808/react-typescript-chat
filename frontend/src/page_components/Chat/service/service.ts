@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import { db, auth, UserInfoType } from "../../../utils/firebase";
+import { db, UserInfoType } from "../../../utils/firebase";
 import { en } from "../../../utils/language";
 import {
   ApiReturnRes,
@@ -7,12 +7,17 @@ import {
   MessageArrayType,
   ApiReturnResponse,
 } from "../../../utils/types";
-import { convertFBApiResponse } from "../../../utils/utilities";
+import { convertFBApiResponse, convertTsToTime } from "../../../utils/utilities";
 
-export const fetchUser = async (
-  roomName: string
-): Promise<ApiReturnResponse<UserInfoType>> => {
-  const { DB_ROOM_COLLECTION, ROOM_NOT_EXISTS_ERROR, FETCH_USER_ERROR } = en;
+export const fetchUsers = async (
+  roomName: string,
+): Promise<ApiReturnResponse<UserInfoType[]>> => {
+
+  const {
+    DB_ROOM_COLLECTION,
+    ROOM_NOT_EXISTS_ERROR,
+    FETCH_USER_ERROR,
+  } = en;
 
   try {
     const checkRoom = await db
@@ -27,14 +32,11 @@ export const fetchUser = async (
       ) as ApiReturnErrorRes;
     }
 
-    const user: UserInfoType = await checkRoom
-      .data()!
-      .users.find(
-        (user: UserInfoType) => user.email === auth.currentUser?.email
-      );
+    const users: UserInfoType[] = await checkRoom.data()!.users;
 
     // Save user name to reducer
-    return convertFBApiResponse(true, user);
+    return convertFBApiResponse(true, users);
+
   } catch (error) {
     return convertFBApiResponse(false, FETCH_USER_ERROR) as ApiReturnErrorRes;
   }
@@ -69,7 +71,10 @@ export const fetchMessages = async (
         id: chat.id,
         user: chat.data().user,
         text: chat.data().message,
-        timeStamp: chat.data().date_created,
+        timeStamp: convertTsToTime(chat.data().date_created),
+        dateInfo: new Date(
+          chat.data().date_created.toDate()
+        )?.toLocaleDateString()
       })
     );
 
