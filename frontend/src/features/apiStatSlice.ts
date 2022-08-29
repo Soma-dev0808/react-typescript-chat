@@ -19,6 +19,7 @@ export const apiStatSlice = createSlice({
     apiStatus: initialState,
   },
   reducers: {
+    // Triggered when calling api.
     startOrEndCallApi: (state, action: PayloadAction<boolean>) => {
       const { apiErrorMessages, redirectPath } = state.apiStatus;
       state.apiStatus = {
@@ -27,6 +28,7 @@ export const apiStatSlice = createSlice({
         redirectPath: action.payload ? null : redirectPath,
       };
     },
+    // If there's an error with an api call, set error detail.
     setAPIError: (state, action: PayloadAction<Partial<ApiErrorState>>) => {
       const newState: ApiErrorState = {
         isApiLoading: false,
@@ -41,6 +43,7 @@ export const apiStatSlice = createSlice({
       }
       state.apiStatus = newState;
     },
+    // Clear error state set.
     clearError: (state) => {
       state.apiStatus.apiErrorMessages = null;
       state.apiStatus.redirectPath = null;

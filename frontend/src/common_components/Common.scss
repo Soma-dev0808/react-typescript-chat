@@ -3,19 +3,26 @@ $color-deep-white: #f3f3f3;
 $color-dark: #353535;
 $color-grey: #828282;
 $error-color: #ff5a5f;
-$default-color: #6c757d;
+$default-color: #78838c;
+$default-dark-color: #6c757d;
 $primary-color: #0a9b94;
+$primary-dark-color: #0a948d;
 $secondary-color: #efede0;
 $danger-color: #dc3545;
+$danger-dark-color: #cd3040;
 $bg-color-black: #1a1a1d;
+$bg-color-khaki: #efede0;
 $header-color: #242526;
-$api-message-color: #353535;
-$typical-border-color: rgba(0,0,0,0.1);
+// $api-message-color: #353535;
+$typical-border-color: rgba(0, 0, 0, 0.1);
 $background-white-gray: #f5f5f5;
 
 // text color
 $dark-text-color: #3c4a60;
-$disable-text-color: rgba(60,74,96,0.5);
+$disable-text-color: rgba(60, 74, 96, 0.5);
+
+// h tag
+$hTagBorder: 1px solid $primary-color;
 
 $space-xs: 5px;
 $space-s: 10px;
@@ -26,7 +33,8 @@ $p-m: 8px;
 $p-l: 16px;
 $form-width-s: 90%;
 $form-width-m: 60%;
-$form-width-l: 20%;
+$form-width-l: 40%;
+$form-width-xl: 20%;
 
 // shadow
 $layer1-boxshadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -55,22 +63,4 @@ $layer3-boxshadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 .pr-10 {
   padding-right: $space-s;
-}
-
-@mixin desktop {
-  @media (min-width: 769px) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
-
-@mixin mobile {
-  @media (max-width: 480px) {
-    @content;
-  }
 }

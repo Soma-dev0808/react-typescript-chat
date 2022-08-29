@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import ApiResponseBar from "./ApiResponseBar";
+import ApiResponseBar from "../ApiResponseBar";
 import Button from "../Button";
 import useAuth from "../CustomHooks/useAuth";
 import useErrorMessages from "../CustomHooks/useErrorMessages";
@@ -20,8 +20,6 @@ const Header: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const { isLoading, isAuth } = useAuth();
-  // Set error messages observer
-  useErrorMessages();
   // チャットの場合はfixedにしない
   const isChat = location.pathname === routePath.chat;
 
@@ -71,6 +69,9 @@ const Header: React.FC = () => {
               buttonText={getButtonName()}
               onClickEvent={handleButtonClick}
               size={"sm"}
+              primary
+              variant
+              textBold
             />
           </div>
         )}

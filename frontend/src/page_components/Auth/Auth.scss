@@ -1,4 +1,5 @@
 @import "../../common_components/Common.scss";
+@import "../../common_components/mixin";
 
 .auth-outer-container {
   display: flex;
@@ -6,23 +7,18 @@
   text-align: center;
   height: 100vh;
   align-items: center;
-  background-color: $bg-color-black;
+  background-color: $bg-color-khaki;
 
   .auth-inner-container {
-    width: $form-width-l;
+    width: $form-width-xl;
   }
 
   .join-input {
-    border-radius: 0;
-    padding: 15px 20px;
-    width: 100%;
+    @include formInputBase;
   }
 
   .heading {
-    color: $color-white;
-    font-size: 2.5em;
-    padding-bottom: $space-s;
-    border-bottom: 2px solid $color-white;
+    @include h1FormTitleBase;
   }
 
   // .button {
@@ -37,6 +33,12 @@
   //   width: 100%;
   //   cursor: pointer;
   // }
+
+  @include desktopS {
+    .auth-inner-container {
+      width: $form-width-l;
+    }
+  }
 
   @include tablet {
     .auth-inner-container {
