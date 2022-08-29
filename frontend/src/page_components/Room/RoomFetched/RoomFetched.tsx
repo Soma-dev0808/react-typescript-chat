@@ -9,7 +9,7 @@ interface Props {
   buttonAction: (roomName: { roomName: string }) => void;
 }
 
-const ExistRoom: React.FC<Props> = ({ room, buttonAction }) => {
+const RoomFetched: React.FC<Props> = ({ room, buttonAction }) => {
   const handleButtonClick = (): void => {
     if (room?.roomName) {
       buttonAction({ roomName: room.roomName });
@@ -34,4 +34,4 @@ const ExistRoom: React.FC<Props> = ({ room, buttonAction }) => {
   );
 };
 
-export default ExistRoom;
+export default RoomFetched;

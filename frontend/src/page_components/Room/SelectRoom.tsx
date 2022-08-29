@@ -6,8 +6,6 @@ import { SubmitActionProps } from "./Room";
 import { joinRoomService } from "./service/service";
 import { ApiReturnResponse } from "../../utils/types";
 
-import "./Room.scss";
-
 // Find an existing room
 const SelectRoom: React.FC = () => {
   const history = useHistory();

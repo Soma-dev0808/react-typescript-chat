@@ -1,6 +1,6 @@
 import { RoomInfoType, MessaageType, NextRefType, UserInfoType } from "../utils/firebase";
 
-// interfaces used to define a new object or method of an object.
+// Interfaces used to define a new object or method of an object.
 interface MessageArrayType extends MessaageType {
   id?: string;
 }
@@ -30,7 +30,23 @@ interface SearchFilterState {
   isPersonal?: boolean,
 }
 
-// types to create functions or return values.
+// Form type for an auth form.
+interface AuthFormProps extends FormProps {
+  isLogin: boolean;
+}
+
+// Form type for a room form.
+interface RoomFormProps extends FormProps {
+  isJoin: boolean;
+}
+
+// Base type for a form.
+interface FormProps {
+  formAction: (e: React.FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
+}
+
+// Types to create functions or return values.
 interface RoomListState {
   rooms: Array<RoomInfoType>;
   nextRef: NextRefType;
@@ -52,7 +68,7 @@ type UseRoomNameType = {
   room: string;
 };
 
-// currently only sm available
+// Currently only sm available
 enum TextFormInputSize {
   sm = "sm",
 }
@@ -70,4 +86,6 @@ export type {
   CurrUsers,
   SearchFilterState,
   RoomListState,
+  AuthFormProps,
+  RoomFormProps,
 };

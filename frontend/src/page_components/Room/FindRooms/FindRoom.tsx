@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { routePath } from "../../../router/router";
 
-import ExistRooms from "../ExistRooms";
+import RoomFetched from "../RoomFetched";
 import Button from "../../../common_components/Button/Button";
 import TextFormInput from "../../../common_components/TextFormInput";
 import NoWrapLoadingIndicator from "../../../common_components/NoWrapLoadingIndicator";
@@ -126,7 +126,7 @@ const FindRoom: React.FC<Props> = ({ handleClose }) => {
               key={room?.date_created?.seconds || generateKey(i)}
               className="find-room-list-item"
             >
-              <ExistRooms room={room} buttonAction={handleJoinButton} />
+              <RoomFetched room={room} buttonAction={handleJoinButton} />
             </div>
           ))}
 

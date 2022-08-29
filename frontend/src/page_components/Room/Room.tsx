@@ -18,8 +18,6 @@ import { ApiReturnErrorRes, ApiReturnResponse } from "../../utils/types";
 import { en } from "../../utils/language";
 import { History } from "history";
 
-import "./Room.scss";
-
 export interface SubmitActionProps {
   (
     username: string,
@@ -34,7 +32,11 @@ interface Props {
   submitAction: SubmitActionProps;
 }
 
-const Room: React.FC<Props> = ({ history, submitAction, isJoin = true }) => {
+const Room: React.FC<Props> = ({
+  history,
+  submitAction,
+  isJoin = true
+}) => {
   const dispatch = useDispatch();
   const { isApiLoading } = useSelector(selectApiStatus);
   const { username } = useAuth();
@@ -72,7 +74,11 @@ const Room: React.FC<Props> = ({ history, submitAction, isJoin = true }) => {
 
   return (
     <>
-      <RoomForm isJoin={isJoin} buttonAction={handleSubmit} />
+      <RoomForm
+        isJoin={isJoin}
+        formAction={handleSubmit}
+        isLoading={isApiLoading}
+      />
       <LoadingIndicator isLoading={isApiLoading} />
     </>
   );
