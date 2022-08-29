@@ -18,7 +18,10 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   return (
     <div className="link-container">
       <Link
-        className={classNames("styled-link", { "disable-link": disabled })}
+        className={classNames(
+          "styled-link",
+          { "disable-link": disabled }
+        )}
         to={to}
       >
         {title}

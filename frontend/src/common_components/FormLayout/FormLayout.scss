@@ -1,0 +1,53 @@
+@import "../Common.scss";
+@import "../mixin";
+
+.form {
+    &-outer-container {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+        align-items: center;
+        background-color: $bg-color-khaki;
+    }
+
+    &-input {
+        @include formInputBase;
+    }
+
+    &-inner-container {
+        width: $form-width-xl;
+    }
+
+    &-header-text {
+        @include h1FormTitleBase;
+    }
+
+    @include desktopS {
+        &-inner-container {
+            width: $form-width-l;
+        }
+    }
+
+    @include tablet {
+        &-inner-container {
+            width: $form-width-m;
+        }
+    }
+
+    @include mobile {
+        &-inner-container {
+            width: $form-width-s;
+        }
+    }
+
+    @include mobile {
+        &-outer-container {
+            height: calc(100% - 53px);
+        }
+    }
+
+    button:focus {
+        outline: 0;
+    }
+}
