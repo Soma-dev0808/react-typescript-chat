@@ -21,10 +21,27 @@
     align-items: center;
   }
 
+  &-right-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-right-username {
+    font-weight: bold;
+    color: white;
+    margin-right: $p-m;
+    white-space: nowrap;
+  }
+
   &-title {
     flex-grow: 1;
     color: $color-white;
     margin: 0;
+  }
+
+  &-button {
+    flex-grow: 0;
   }
 
   &-menu {

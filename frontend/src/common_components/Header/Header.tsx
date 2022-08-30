@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const { isLoading, isAuth } = useAuth();
+  const { isLoading, isAuth, username } = useAuth();
   // チャットの場合はfixedにしない
   const isChat = location.pathname === routePath.chat;
 
@@ -63,7 +63,12 @@ const Header: React.FC = () => {
       <div className="header-bar">
         <Title />
         {!isLoading && (
-          <div>
+          <div className="header-right-container">
+            {isAuth && (
+              <span className="header-right-username">
+                {username}
+              </span>
+            )}
             <Button
               isDisabled={isLoading}
               buttonText={getButtonName()}
