@@ -150,6 +150,8 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
         </div>
       </div>
       <LoadingIndicator isLoading={isApiLoading} />
+
+      {/* Create original dialog */}
       <Prompt message={en.CONFIRM_LEAVE_PAGE_MESSAGE} />
     </>
   );
