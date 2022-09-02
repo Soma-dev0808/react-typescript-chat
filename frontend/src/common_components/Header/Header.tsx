@@ -1,20 +1,23 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import ApiResponseBar from "../ApiResponseBar";
 import Button from "../Button";
 import useAuth from "../CustomHooks/useAuth";
+import ConfirmDialog from "../ConfirmDialog";
+
 import { signOut } from "../../page_components/Auth/service/service";
 import { startOrEndCallApi, setAPIError } from "../../features/apiStatSlice";
 import { routePath } from "../../router/router";
-import { en } from "../../utils/language";
 
 import "./Header.scss";
 import { ApiReturnErrorRes } from "../../utils/types";
 import { classNames } from "../../utils/utilities";
+import { en } from "../../utils/language";
 
 const Header: React.FC = () => {
+  const [isShowConfirm, setIsShowConfirm] = useState<boolean>(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -22,17 +25,12 @@ const Header: React.FC = () => {
   // チャットの場合はfixedにしない
   const isChat = location.pathname === routePath.chat;
 
+  // Sign-in/out button clicked
   const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // sign out if isAuth is true.
     if (isAuth) {
-      dispatch(startOrEndCallApi(true));
-      const res = (await signOut()) as ApiReturnErrorRes;
-      if (res?.errorMessage) {
-        dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
-      } else {
-        dispatch(startOrEndCallApi(false));
-      }
+      setIsShowConfirm(true);
     } else if (!isAuth && location.pathname === routePath.signIn) {
       // go to sign up page
       history.push(routePath.signUp);
@@ -41,6 +39,21 @@ const Header: React.FC = () => {
       history.push(routePath.signIn);
     }
   };
+
+  // Clicked 'yes' during sign out confirmation. 
+  const handleSignOutOk = async () => {
+    dispatch(startOrEndCallApi(true));
+    const res = (await signOut()) as ApiReturnErrorRes;
+    if (res?.errorMessage) {
+      dispatch(setAPIError({ apiErrorMessages: res.errorMessage }));
+    } else {
+      dispatch(startOrEndCallApi(false));
+    }
+    setIsShowConfirm(false);
+  };
+
+  // Clicked 'no' during sign out confirmation. 
+  const handleSignOutCancel = () => setIsShowConfirm(false);
 
   const getButtonName = useCallback((): string => {
     let authStatusButtonName = en.SIGN_IN;
@@ -58,30 +71,39 @@ const Header: React.FC = () => {
   );
 
   return (
-    <div className={_classnames}>
-      <div className="header-bar">
-        <Title />
-        {!isLoading && (
-          <div className="header-right-container">
-            {isAuth && (
-              <span className="header-right-username">
-                {username}
-              </span>
-            )}
-            <Button
-              isDisabled={isLoading}
-              buttonText={getButtonName()}
-              onClickEvent={handleButtonClick}
-              size={"sm"}
-              primary
-              variant
-              textBold
-            />
-          </div>
-        )}
+    <>
+      <div className={_classnames}>
+        <div className="header-bar">
+          <Title />
+          {!isLoading && (
+            <div className="header-right-container">
+              {isAuth && (
+                <span className="header-right-username">
+                  {username}
+                </span>
+              )}
+              <Button
+                isDisabled={isLoading}
+                buttonText={getButtonName()}
+                onClickEvent={handleButtonClick}
+                size={"sm"}
+                primary
+                variant
+                textBold
+              />
+            </div>
+          )}
+        </div>
+        <ApiResponseBar />
       </div>
-      <ApiResponseBar />
-    </div>
+      <ConfirmDialog
+        isShow={isShowConfirm}
+        headerText={en.CONFIRM_SIGN_OUT_TITLE}
+        bodyText={en.CONFIRM_SIGN_OUT_MESSAGE}
+        yesAction={handleSignOutOk}
+        noAction={handleSignOutCancel}
+      />
+    </>
   );
 };
 

@@ -15,6 +15,13 @@
         }
     }
 
+    &-hover-disabled {
+        &:hover {
+            cursor: default;
+            background-color: white;
+        }
+    }
+
     &-room-name {
         color: $dark-text-color;
         font-size: 18px;
