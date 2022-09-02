@@ -108,7 +108,7 @@ const Header: React.FC = () => {
 };
 
 const Title: React.FC = () => {
-  return <h3 className="header-title"> {en.APP_TITLE} </h3>;
+  return <span className="header-title"> {en.APP_TITLE} </span>;
 };
 
 export default React.memo(Header);

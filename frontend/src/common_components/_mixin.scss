@@ -5,6 +5,10 @@
     font-size: 2.5em;
     padding-bottom: $space-s;
     border-bottom: $hTagBorder;
+
+    @include mobile {
+        font-size: 2em;
+    }
 }
 
 @mixin formInputBase {
@@ -16,6 +20,11 @@
 
     &:focus {
         border: 1px solid $primary-color;
+    }
+
+    &::placeholder {
+        font-weight: bold;
+        color: #b6b6b6;
     }
 }
 
