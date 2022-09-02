@@ -62,8 +62,20 @@
     padding: $p-l;
   }
 
+  @include mobile {
+    &-info {
+      font-size: 13px;
+    }
+  }
+
   &-join-button {
     padding: $p-l;
+  }
+
+  @include mobile {
+    &-join-button {
+      display: flex;
+    }
   }
 
   &-no-result {

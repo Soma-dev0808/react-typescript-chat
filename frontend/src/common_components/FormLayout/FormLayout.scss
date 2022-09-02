@@ -43,7 +43,8 @@
 
     @include mobile {
         &-outer-container {
-            height: calc(100% - 53px);
+            // before is was 53px
+            height: calc(100% - 40px);
         }
     }
 

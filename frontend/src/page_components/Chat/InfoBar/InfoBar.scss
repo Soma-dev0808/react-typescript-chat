@@ -20,13 +20,19 @@
   color: $dark-text-color;
 }
 
+@include mobile {
+  .room-name-header {
+    font-size: $common-text-small;
+  }
+}
+
 .right-inner {
 
   &-container {
     display: flex;
     flex: 0.5;
     justify-content: flex-end;
-    align-items: baseline;
+    align-items: center;
     margin-right: 5%;
   }
 
@@ -42,6 +48,12 @@
     width: 60px;
   }
 
+  @include mobile {
+    &-users-button {
+      padding: 2px;
+    }
+  }
+
   &-users-icon {
     width: 23px;
   }
@@ -51,8 +63,14 @@
     margin-left: 3px;
   }
 
+  &-close-link {
+    width: 15px;
+    height: 15px;
+  }
+
   &-close-icon {
-    width: 20px
+    width: 15px;
+    margin-left: 5px;
   }
 }
 

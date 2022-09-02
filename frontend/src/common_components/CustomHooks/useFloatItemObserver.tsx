@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 
-const useDropdown = () => {
+// Show floating item like modal and put ref to the background of the page which make user to close it.
+const useFloatItemObserver = () => {
     const [isShow, setIsShow] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (e: MouseEvent) => {
-
         if (ref.current && !ref.current?.contains(e.target as Node | null)) {
             setIsShow(false);
         }
@@ -22,4 +22,4 @@ const useDropdown = () => {
     return { isShow, setIsShow, ref };
 };
 
-export default useDropdown;
+export default useFloatItemObserver;

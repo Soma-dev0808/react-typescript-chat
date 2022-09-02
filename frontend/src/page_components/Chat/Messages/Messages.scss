@@ -49,6 +49,12 @@
   width: 60%;
 }
 
+@include mobile {
+  .date-label {
+    font-size: 13px;
+  }
+}
+
 @keyframes inAnimation {
   0% {
     opacity: 0;

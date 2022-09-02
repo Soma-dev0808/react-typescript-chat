@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 
+const mobileBoundary = 480;
+
 const useDetectMobile = (): boolean => {
-    const [isMobile, setIsMobile] = useState<boolean>(false);
+    const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
 
-
-    const handleResize = () => {
-        if (window.innerWidth <= 480) {
-            setIsMobile(true);
-        } else {
-            setIsMobile(false);
-        }
-    };
+    const handleResize = () => setInnerWidth(window.innerWidth);
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
@@ -20,7 +15,8 @@ const useDetectMobile = (): boolean => {
         };
     }, []);
 
-    return isMobile;
+    // If screen size is smaller than mobileBoundary.
+    return innerWidth <= mobileBoundary;
 };
 
 export default useDetectMobile;

@@ -7,7 +7,7 @@
     border-bottom: $hTagBorder;
 
     @include mobile {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
 
@@ -48,7 +48,7 @@
 
 @mixin modalBase {
     position: fixed;
-    z-index: 1;
+    z-index: 99;
     left: 0;
     top: 0;
     width: 100%;
@@ -59,7 +59,7 @@
     justify-content: center;
     align-items: center;
     animation-name: animateModal;
-    animation-duration: 0.5s;
+    animation-duration: 0.3s;
 
     @keyframes animateModal {
         0% {

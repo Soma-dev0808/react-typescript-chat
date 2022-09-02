@@ -1,4 +1,5 @@
 @import "../../../../common_components/Common.scss";
+@import "../../../../common_components/mixin";
 
 .message-box {
   background: $color-deep-white;
@@ -16,6 +17,12 @@
   float: left;
   font-size: 1.1em;
   word-wrap: break-word;
+}
+
+@include mobile {
+  .message-text {
+    font-size: 0.9em;
+  }
 }
 
 .message-text img {

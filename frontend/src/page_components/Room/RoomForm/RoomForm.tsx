@@ -58,6 +58,7 @@ const RoomForm: React.FC<RoomFormProps> = ({
           buttonType="submit"
           textBold
           isDisabled={isLoading}
+          size="lg"
         />
         {isJoin && (
           <Button
@@ -66,6 +67,7 @@ const RoomForm: React.FC<RoomFormProps> = ({
             onClickEvent={handleOnToggle}
             textBold
             isDisabled={isLoading}
+            size="lg"
           />
         )}
 

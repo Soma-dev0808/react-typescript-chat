@@ -1,7 +1,37 @@
 @import "../../../common_components/Common.scss";
 
+.chatlist-sidebar-wrapper {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
 .chatlist-sidebar-container {
     width: 300px;
     background-color: $color-white;
     overflow-y: scroll;
+
+    &-mobile {
+        z-index: 99;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 0px;
+        transition: 0.2s;
+
+        &-show {
+            width: 200px;
+        }
+    }
 }

@@ -4,7 +4,7 @@ import UserStatuses from "../UserStatuses";
 import Button from "../../../common_components/Button";
 import useDetectMobile from '../../../common_components/CustomHooks/useDetectMobile';
 import useChatUserStatuses from "../../../common_components/CustomHooks/useChatUserStatuses";
-import useDropdown from "../../../common_components/CustomHooks/useDropdown";
+import useFloatItemObserver from "../../../common_components/CustomHooks/useFloatItemObserver";
 
 import onlineIcon from "../../../icons/onlineIcon.png";
 import closeIcon from "../../../icons/closeIcon.png";
@@ -18,11 +18,17 @@ interface InfoBarState {
   room: string;
   users: UserInfoType[];
   activeUsers: CurrUsers[];
+  setIsShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const InfoBar: React.FC<InfoBarState> = ({ room, users, activeUsers }) => {
+const InfoBar: React.FC<InfoBarState> = ({
+  room,
+  users,
+  activeUsers,
+  setIsShowSideBar
+}) => {
   const isMobile = useDetectMobile();
-  const { isShow, setIsShow, ref } = useDropdown();
+  const { isShow, setIsShow, ref } = useFloatItemObserver();
 
   const userActiveStatus = useChatUserStatuses(users, activeUsers);
 
@@ -37,9 +43,9 @@ const InfoBar: React.FC<InfoBarState> = ({ room, users, activeUsers }) => {
       <div className="right-inner-container">
         <div ref={ref} className="right-inner-users">
           <Button
-            size="xs"
+            size={"xs"}
             onClickEvent={handleShowActiveUser}
-            classnames="right-inner-users-button"
+            classnames={"right-inner-users-button"}
             buttonShadow
             primary
             buttonText={
@@ -54,13 +60,25 @@ const InfoBar: React.FC<InfoBarState> = ({ room, users, activeUsers }) => {
         </div>
 
         {isMobile
-          ? (<Link to="/select-room">
-            <img className="right-inner-close-icon" src={closeIcon} alt="close" />
-          </Link>)
+          ? (
+            <>
+              <Button
+                size={"xs"}
+                onClickEvent={() => setIsShowSideBar(prev => !prev)}
+                classnames={"right-inner-users-button ml-10"}
+                buttonShadow
+                textBold
+                buttonText={"Change room"}
+              />
+              <Link to="/select-room" className="right-inner-close-link">
+                <img className="right-inner-close-icon" src={closeIcon} alt="close" />
+              </Link>
+            </>
+          )
           : null}
       </div>
     </div>
   );
 };
 
-export default InfoBar;
+export default React.memo(InfoBar);
