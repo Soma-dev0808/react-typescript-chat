@@ -34,10 +34,18 @@
     white-space: nowrap;
   }
 
+  @include mobile {
+    &-right-username {
+      font-size: 12px;
+    }
+  }
+
   &-title {
     flex-grow: 1;
     color: $color-white;
     margin: 0;
+    font-weight: bold;
+    font-size: 20px;
   }
 
   &-button {
@@ -50,7 +58,13 @@
 }
 
 @include mobile {
-  .header-parent {
-    position: static;
+  .header {
+    &-parent {
+      position: static;
+    }
+
+    &-title {
+      font-size: 15px;
+    }
   }
 }

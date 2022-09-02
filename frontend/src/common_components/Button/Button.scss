@@ -36,8 +36,22 @@
   padding: $space-s;
 }
 
+@include mobile {
+  .button-sm {
+    padding: $space-xs;
+    font-size: 10px;
+  }
+}
+
 .button-lg {
   padding: $space-l;
+}
+
+@include mobile {
+  .button-lg {
+    padding: $space-s;
+    font-size: 12px;
+  }
 }
 
 .button-shadow {
