@@ -63,6 +63,31 @@
     }
 }
 
+@mixin modalContentBase($width, $height) {
+    background-color: white;
+    width: $width;
+    height: $height;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $color-white;
+    color: $color-white;
+}
+
+@mixin modalHeaderBase {
+    background-color: $primary-color;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid $color-white;
+    padding: $p-m $p-l;
+    display: flex;
+    align-items: center;
+    height: 60px;
+
+    @include mobile {
+        font-size: 14px;
+    }
+}
+
 @mixin desktopL {
     @media (min-width: 901px) {
         @content;

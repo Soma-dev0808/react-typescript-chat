@@ -1,7 +1,57 @@
+@import '../Common.scss';
+@import '../mixin';
+
 .confirm-dialog {
 
     &-container {
         @include modalBase;
     }
 
+    &-header {
+        @include modalHeaderBase;
+    }
+
+    &-content {
+        @include modalContentBase(50%, 40%);
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        &-text {
+            color: $dark-text-color;
+            font-weight: bold;
+            margin-bottom: $p-l;
+        }
+    }
+
+    &-button {
+        width: 90px;
+
+        &:first-child {
+            margin-right: $p-l;
+        }
+
+        &-container {
+            display: flex;
+            flex-direction: row;
+            padding: $p-l;
+        }
+    }
+
+    @include tablet {
+        &-content {
+            @include modalContentBase(70%, 40%);
+        }
+    }
+
+    @include mobile {
+        &-content {
+            @include modalContentBase(90%, 40%);
+        }
+    }
 }

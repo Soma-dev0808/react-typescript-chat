@@ -4,7 +4,7 @@ import { classNames } from "../../utils/utilities";
 import "./Button.scss";
 
 interface ButtonProps {
-  size?: string | null;
+  size?: 'xs' | 'sm' | 'lg';
   primary?: boolean;
   danger?: boolean;
   textBold?: boolean;

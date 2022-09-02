@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Prompt } from "react-router-dom";
-import { History, Location } from "history";
+import { Location } from "history";
 import io, { Socket } from "socket.io-client";
 import { setAPIError, selectApiStatus } from "../../features/apiStatSlice";
 
@@ -31,7 +30,6 @@ const ENDPOINT: string =
 let socket: Socket;
 
 interface ChatProps {
-  history: History;
   location: Location;
 }
 
@@ -150,9 +148,6 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
         </div>
       </div>
       <LoadingIndicator isLoading={isApiLoading} />
-
-      {/* Create original dialog */}
-      <Prompt message={en.CONFIRM_LEAVE_PAGE_MESSAGE} />
     </>
   );
 };

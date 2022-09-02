@@ -9,12 +9,7 @@
 
 
   &-modal-header {
-    background-color: $primary-color;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 1px solid $color-white;
-    padding: $p-m $p-l;
-    display: flex;
-    align-items: center;
+    @include modalHeaderBase;
   }
 
   &-modal-title {
@@ -31,14 +26,7 @@
   }
 
   &-content {
-    background-color: white;
-    width: 45%;
-    height: 70%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid $color-white;
-    color: $color-white;
+    @include modalContentBase(45%, 70%);
   }
 
   @include tablet {

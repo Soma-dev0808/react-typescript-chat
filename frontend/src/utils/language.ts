@@ -4,6 +4,8 @@ export const en = {
   // page constants
   CONFIRM_LEAVE_PAGE_TITLE: "Leave this page?",
   CONFIRM_LEAVE_PAGE_MESSAGE: "Do you want to leave this page?",
+  CONFIRM_SIGN_OUT_TITLE: "Logout of Chat app?",
+  CONFIRM_SIGN_OUT_MESSAGE: "Are you sure you want to logout?",
   // firestore
   DB_ROOM_COLLECTION: "rooms",
   DB_CHAT_COLLECTION: "chats",
