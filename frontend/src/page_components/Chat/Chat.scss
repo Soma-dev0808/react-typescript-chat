@@ -22,6 +22,8 @@
     &-outer-container {
       align-items: center;
       justify-content: center;
+      // before is was 53px
+      height: calc(100% - 40px);
     }
 
     &-container {

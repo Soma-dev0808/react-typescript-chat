@@ -21,6 +21,9 @@ $background-white-gray: #f5f5f5;
 $dark-text-color: #3c4a60;
 $disable-text-color: rgba(60, 74, 96, 0.5);
 
+// common text size(I add common text size as I needed.)
+$common-text-small: 15px;
+
 // h tag
 $hTagBorder: 1px solid $primary-color;
 
@@ -55,6 +58,14 @@ $layer3-boxshadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 .mb-20 {
   margin-bottom: $space-m;
+}
+
+.ml-10 {
+  margin-left: $space-s;
+}
+
+.mr-10 {
+  margin-right: $space-s;
 }
 
 .pl-10 {

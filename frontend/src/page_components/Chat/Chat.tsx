@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Location } from "history";
 import io, { Socket } from "socket.io-client";
@@ -12,6 +12,8 @@ import LoadingIndicator from "../../common_components/LoadingIndicator";
 
 import useChatRoomInfo from "../../common_components/CustomHooks/useChatRoomInfo";
 import useRoomName from "../../common_components/CustomHooks/useRoomName";
+import useDetectMobile from "../../common_components/CustomHooks/useDetectMobile";
+import useFloatItemObserver from "../../common_components/CustomHooks/useFloatItemObserver";
 import { saveMessages } from "./service/service";
 import { en } from "../../utils/language";
 import {
@@ -43,6 +45,11 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
 
   const { room }: UseRoomNameType = useRoomName(location);
   const { userInfo, users, messages, setMessages }: UseChatRoomInfoType = useChatRoomInfo(room);
+
+  // For side bar
+  const isMobile = useDetectMobile();
+  const { isShow: isShowSideBar, setIsShow, ref } = useFloatItemObserver();
+
   const username = userInfo?.name;
   const userEmail = userInfo?.email;
 
@@ -70,7 +77,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
         // Make a delay to display a user enter or leave message.
         setTimeout(() => {
           setMessages((prev) => prev.concat(message));
-        }, 300);
+        }, 500);
       });
 
       socket.on(en.SOCKET_ROOM_DATA, ({ users }: { users: CurrUsers[] }) => {
@@ -79,13 +86,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
     }
   }, [username, room, setMessages, setActiveUsers]);
 
-  useEffect(() => {
-    return () => {
-      setMessages([]);
-      setActiveUsers([]);
-    };
-  }, [room, setMessages]);
-
+  // When unload page, socket.io connection will be reset.
   useEffect(() => {
     window.onbeforeunload = function (e: BeforeUnloadEvent) {
       e.preventDefault();
@@ -100,6 +101,25 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
       window.onbeforeunload = null;
     };
   }, [room]);
+
+  // Reset messages and active users.
+  useEffect(() => {
+    return () => {
+      setMessages([]);
+      setActiveUsers([]);
+    };
+  }, [room, setMessages]);
+
+  // When location or screen type is changed, check side bar for mobile is opened.
+  // Then close it if it's opened.
+  useEffect(() => {
+    if (isMobile && isShowSideBar) {
+      setIsShow(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, isMobile, setIsShow]);
+
+  const setIsShowSideBar = useCallback(setIsShow, [setIsShow]);
 
   // send input message
   const sendMessage = async (
@@ -126,20 +146,36 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
     }
   };
 
+  // Set input message here.
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputValue: string = e.target.value;
     setMessage(inputValue);
   };
 
+  // If it's not mobile, then assign true anyway.
+  const _isShowSideBar = isMobile ? isShowSideBar : true;
+
   return (
     <>
       <div className="chat-outer-container">
+
         {/* Side bar */}
-        <ChatListSideBar />
+        <ChatListSideBar
+          isShowSideBar={_isShowSideBar}
+          clickObserver={ref}
+        />
         {/* <TextContainer activeUsers={activeUsers} /> */}
         <div className="chat-container">
-          <InfoBar room={room} users={users} activeUsers={activeUsers} />
-          <Messages messages={messages} username={username ?? ''} />
+          <InfoBar
+            room={room}
+            users={users}
+            activeUsers={activeUsers}
+            setIsShowSideBar={setIsShowSideBar}
+          />
+          <Messages
+            messages={messages}
+            username={username ?? ''}
+          />
           <Input
             message={message}
             handleInput={handleInput}

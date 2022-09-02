@@ -43,6 +43,12 @@
         }
     }
 
+    @include mobile {
+        &-button {
+            padding: 10px;
+        }
+    }
+
     @include tablet {
         &-content {
             @include modalContentBase(70%, 40%);

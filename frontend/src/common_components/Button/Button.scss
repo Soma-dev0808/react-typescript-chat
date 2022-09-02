@@ -32,6 +32,12 @@
   padding: $space-xs;
 }
 
+@include mobile {
+  .button-xs {
+    font-size: 10px;
+  }
+}
+
 .button-sm {
   padding: $space-s;
 }
@@ -44,12 +50,11 @@
 }
 
 .button-lg {
-  padding: $space-l;
+  padding: $space-m;
 }
 
 @include mobile {
   .button-lg {
-    padding: $space-s;
     font-size: 12px;
   }
 }
