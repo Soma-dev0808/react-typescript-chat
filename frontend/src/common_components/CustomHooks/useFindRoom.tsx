@@ -40,6 +40,7 @@ const useFindRoom = (isPersonal = false): FindRomState => {
       filterObj: SearchFilterState,
       isReset: boolean = false
     ) => {
+      // Reset room list.
       if (isReset) setRoomList(initialState);
 
       setIsLoading(true);

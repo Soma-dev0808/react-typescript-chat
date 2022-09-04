@@ -44,7 +44,12 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
   const [message, setMessage] = useState<string>("");
 
   const { room }: UseRoomNameType = useRoomName(location);
-  const { userInfo, users, messages, setMessages }: UseChatRoomInfoType = useChatRoomInfo(room);
+  const {
+    userInfo,
+    users,
+    messages,
+    setMessages
+  }: UseChatRoomInfoType = useChatRoomInfo(room);
 
   // For side bar
   const isMobile = useDetectMobile();
@@ -102,9 +107,10 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
     };
   }, [room]);
 
-  // Reset messages and active users.
+  // Reset message, messages and active users.
   useEffect(() => {
     return () => {
+      setMessage('');
       setMessages([]);
       setActiveUsers([]);
     };
@@ -173,6 +179,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
             setIsShowSideBar={setIsShowSideBar}
           />
           <Messages
+            roomName={room}
             messages={messages}
             username={username ?? ''}
           />

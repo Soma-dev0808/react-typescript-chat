@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { db, auth } from "../../../utils/firebase";
+import { db, auth, FireBaseErrorType } from "../../../utils/firebase";
 import {
   convertFBApiResponse,
   retrieveFBErrorMessage,
@@ -44,9 +44,9 @@ export const handleSubmit = async (
 
 // sign up
 const signUp = async ({ username, email, password }: UserInputProps) => {
-  const hasduplicate = await checkUsernameDuplication(username);
-  if (!hasduplicate) {
-    return convertFBApiResponse(false, en.USERNAME_EXISTS_ERROR);
+  const isDuplicatedRes = await checkUsernameDuplication(username);
+  if (!isDuplicatedRes.isNotDuplicated) {
+    return convertFBApiResponse(false, isDuplicatedRes.detail);
   }
   return auth
     .createUserWithEmailAndPassword(email, password)
@@ -92,13 +92,23 @@ export const signOut = async (): Promise<ApiReturnResponse<null>> => {
     );
 };
 
+interface DuplicationCheckResponse {
+  isNotDuplicated: boolean;
+  detail: string;
+}
+
 // check username is already taken. If not, return true
 const checkUsernameDuplication = async (
   username?: string
-): Promise<boolean> => {
-  const usernames = await db.collection(en.USERNAMES).get();
+): Promise<DuplicationCheckResponse> => {
+  try {
+    const usernames = await db.collection(en.USERNAMES).get();
+    const res = await usernames.query.where(en.USERNAME, "==", username).get();
+    const isNotDuplicated = res.size === 0;
 
-  const res = await usernames.query.where(en.USERNAME, "==", username).get();
-
-  return res.size === 0;
+    return isNotDuplicated ? { isNotDuplicated, detail: '' } : { isNotDuplicated, detail: en.USERNAME_EXISTS_ERROR };
+  } catch (error) {
+    const err = error as FireBaseErrorType;
+    return { isNotDuplicated: false, detail: err.message };
+  }
 };
