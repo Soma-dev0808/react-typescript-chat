@@ -16,12 +16,19 @@ let prevDate: string = "";
 interface MessagesProps {
   messages: MessageArrayType[];
   username: string;
+  roomName: string;
 }
 
-const Messages: React.FC<MessagesProps> = ({ messages, username }) => {
+const Messages: React.FC<MessagesProps> = ({ messages, username, roomName }) => {
   const [isBottom, setIsBottom] = useState<boolean>(true);
   const bottomRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
+  // Resete isBottom when room name is changed.
+  useEffect(() => {
+    setIsBottom(true);
+  }, [roomName]);
+
+  // When message is updated scroll to bottom.
   useEffect(() => {
     scrollToBottom(bottomRef, { behavior: "smooth" });
   }, [messages]);

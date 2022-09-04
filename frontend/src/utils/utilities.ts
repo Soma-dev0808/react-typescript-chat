@@ -224,7 +224,7 @@ export const handleScroll = (
   const { scrollHeight, scrollTop, clientHeight } = e.target as HTMLDivElement;
 
   if (scrollHeight && scrollTop && clientHeight) {
-    const _isBottom = scrollHeight - scrollTop <= clientHeight + 5;
+    const _isBottom = scrollHeight - scrollTop <= clientHeight + 55; // Sometimes scrollHeight - scrollTop is not always correct, so added 55 to put some margin.
     // when reached bottom, excute call back.
     bottomActionCB && bottomActionCB(_isBottom);
   }
