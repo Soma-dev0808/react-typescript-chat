@@ -1,3 +1,4 @@
+import React from "react";
 import { Dispatch } from "react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import * as H from "history";
@@ -214,7 +215,7 @@ const _adjustTimeString = (timeNum: number): string => {
 };
 
 /**
- * add zero if length of parameter is 1. (ex, 1 -> 01)
+ * Call bottom/top action callback when reached bottom or top.
  */
 export const handleScroll = (
   e: React.UIEvent<HTMLDivElement>,
@@ -284,5 +285,32 @@ export const getUserNames = (users: UserInfoType[]): string => {
   };
 
   return userNames;
+};
+
+type ChildrenType = React.ReactNode | React.ReactNode[];
+type AddPropsToChildrenRes = React.ReactNode | React.ReactElement;
+
+// Clone element of children is the element is valid element.
+const addPropsToReactElement = (
+  element: React.ReactNode,
+  ...props: any
+): AddPropsToChildrenRes => {
+  if (React.isValidElement(element)) {
+    return React.cloneElement(element, ...props);
+  }
+
+  return element;
+};
+
+// Add props to children by creating clone of children
+export const addPropsToChildren = (
+  children: ChildrenType,
+  ...props: any
+): AddPropsToChildrenRes => {
+  if (Array.isArray(children)) {
+    return children.map(child => addPropsToChildren(child, ...props));
+  }
+
+  return addPropsToReactElement(children, ...props);
 };
 
