@@ -2,10 +2,12 @@ import React from 'react';
 
 import useFindRoom from '../../../common_components/CustomHooks/useFindRoom';
 import ChatListItem from '../ChatListItem';
-import NoWrapLoadingIndicator from '../../../common_components/NoWrapLoadingIndicator';
+import ScrollableRoomList from '../../../common_components/ScrollableRoomList';
+import MobileWrapper from '../../../common_components/MobileWrapper';
 import useDetectMobile from '../../../common_components/CustomHooks/useDetectMobile';
 import { classNames } from '../../../utils/utilities';
 
+import { RoomListState } from '../../../utils/types';
 import './ChatListSideBar.scss';
 
 interface ChatListSideBarProps {
@@ -13,13 +15,16 @@ interface ChatListSideBarProps {
   clickObserver: React.RefObject<HTMLDivElement>;
 }
 
-// todo: サイドバーをつくる(スクロールも含めて)
+const listFetchLimit = 20;
+const isPersonal = true;
+
+// Sidebar which shows chat list
 const ChatListSideBar: React.FC<ChatListSideBarProps> = ({
   isShowSideBar,
   clickObserver
 }) => {
-
-  const { isLoading, roomList } = useFindRoom(true);
+  // const [isBottom, setIsBottom] = useState<boolean>(false);
+  const _useFindRoom = useFindRoom(isPersonal, listFetchLimit);
   const isMobile = useDetectMobile();
 
   const cls = classNames(
@@ -28,51 +33,37 @@ const ChatListSideBar: React.FC<ChatListSideBarProps> = ({
     { 'chatlist-sidebar-container-mobile-show': isMobile && isShowSideBar }
   );
 
+  // This will receive props from wrapper component.
+  const RoomsReceiver: React.FC<Partial<RoomListState>> = ({ rooms }) => {
+    if (!Array.isArray(rooms)) return null;
+
+    const chatItems = rooms.map((room, idx) => (
+      <ChatListItem
+        key={idx + room.date_created.seconds}
+        roomName={room.roomName}
+        users={room.users}
+      />
+    ));
+
+    return <>
+      {chatItems}
+    </>;
+  };
+
   return (
     <MobileWrapper
+      wrapperCls={classNames({ 'chatlist-sidebar-wrapper': isMobile && isShowSideBar })}
       isMobile={isMobile}
-      isShowSideBar={isShowSideBar}
     >
-      <div ref={clickObserver} className={cls}>
-
-        {isLoading && <NoWrapLoadingIndicator />}
-
-        {roomList.rooms.map((room, idx) => (
-          <ChatListItem
-            key={idx + room.date_created.seconds}
-            roomName={room.roomName}
-            users={room.users}
-          />
-        ))}
-
-      </div>
+      <ScrollableRoomList
+        refProp={clickObserver}
+        cls={cls}
+        useFindRoom={_useFindRoom}
+      >
+        <RoomsReceiver />
+      </ScrollableRoomList>
     </MobileWrapper>
   );
 };
-
-interface CustomWrapperProps {
-  isMobile: boolean;
-  isShowSideBar: boolean;
-}
-
-// When the screen is for mobile, add div element to create clickable background area.
-const MobileWrapper: React.FC<CustomWrapperProps> = React.memo(({
-  children,
-  isMobile,
-  isShowSideBar
-}) => {
-
-  const wrapperCls = classNames({ 'chatlist-sidebar-wrapper': isMobile && isShowSideBar });
-
-  // If it's not mobile, just return children in fragemnt.
-  const Wrapper = !isMobile
-    ? <> {children} </>
-    : <div className={wrapperCls}>
-      {children}
-    </div>;
-
-  return Wrapper;
-});
-
 
 export default React.memo(ChatListSideBar);

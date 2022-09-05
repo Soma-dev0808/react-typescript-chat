@@ -12,7 +12,7 @@ import {
 import { NextRefType } from "../../utils/firebase";
 import { en } from "../../utils/language";
 
-interface FindRomState {
+export interface FindRomState {
   isLoading: boolean;
   roomList: RoomListState;
   fetchExistRooms: (
@@ -22,13 +22,12 @@ interface FindRomState {
   ) => Promise<void>;
 }
 
-const listFetchLimit = 10;
 const initialState: RoomListState = {
   rooms: [],
   nextRef: null,
 };
 
-const useFindRoom = (isPersonal = false): FindRomState => {
+const useFindRoom = (isPersonal = false, listFetchLimit = 10): FindRomState => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [roomList, setRoomList] = useState<RoomListState>(initialState);
@@ -44,6 +43,9 @@ const useFindRoom = (isPersonal = false): FindRomState => {
       if (isReset) setRoomList(initialState);
 
       setIsLoading(true);
+
+      // Set isPersonal to the filter object 
+      filterObj.isPersonal = isPersonal;
 
       const res: ApiReturnRes<RoomListState> = await fetchRoomList(
         listFetchLimit,
@@ -62,12 +64,11 @@ const useFindRoom = (isPersonal = false): FindRomState => {
       }
       setIsLoading(false);
     },
-    [dispatch]
+    [dispatch, isPersonal, listFetchLimit]
   );
 
   // custom hook to fetch roomlist during initial loading.
-  const initialFilter = isPersonal ? { isPersonal } : {};
-  useInit(fetchExistRooms, roomList.nextRef, initialFilter);
+  useInit(fetchExistRooms, roomList.nextRef, {});
 
   // unset roomList when unmounting
   useEffect(() => {

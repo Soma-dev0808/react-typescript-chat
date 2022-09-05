@@ -6,17 +6,17 @@ import { en } from "../../../utils/language";
 
 interface Props {
   room: RoomInfoType;
-  buttonAction: (roomName: { roomName: string }) => void;
+  buttonAction: (selectedRoomName: { selectedRoomName: string }) => void;
 }
 
 const RoomFetched: React.FC<Props> = ({ room, buttonAction }) => {
   const handleButtonClick = (): void => {
     if (room?.roomName) {
-      buttonAction({ roomName: room.roomName });
+      buttonAction({ selectedRoomName: room.roomName });
     }
   };
   return (
-    <>
+    <div className="find-room-list-item">
       <div className="find-room-info">
         <div>Room Name: {room?.roomName}</div>
         <div>People: {room?.users?.length}</div>
@@ -30,7 +30,7 @@ const RoomFetched: React.FC<Props> = ({ room, buttonAction }) => {
           textBold
         />
       </div>
-    </>
+    </div>
   );
 };
 
