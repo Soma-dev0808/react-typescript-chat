@@ -2,8 +2,8 @@
 
 #### About this app:
  
-Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room, built with React, React-redux, JavaScript, and CSS.
-Used Node.js for the backend, and socket.io for handling real time user status and text messaging. 
+Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room. Built with React, React-redux, Typescript, and CSS.
+Use Node.js for the backend, and socket.io for handling real time user status and text messaging. 
 
 
 ### Project Screen Shot(s)
