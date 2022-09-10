@@ -9,12 +9,17 @@ Use Node.js for the backend, and socket.io for handling real time user status an
 ### Project Screen Shot(s)
 
 <div>
- <img src="https://user-images.githubusercontent.com/55787141/152980902-0dab9c71-030b-4619-b766-43a78b279e8f.png" width="450">
+<img width="450" alt="Screen Shot 2022-09-10 at 4 41 29 PM" src="https://user-images.githubusercontent.com/55787141/189505402-8c1424a5-b2bf-4894-8b36-afe903ac8e84.png">
 
- <img src="https://user-images.githubusercontent.com/55787141/152981084-35b66b8e-8431-4c43-b320-4be48b8d44d2.png" width="450">
+<br>
 
- <img src="https://user-images.githubusercontent.com/55787141/152981225-d8d79254-97b3-4e5a-b747-59e925a1c739.png" width="450">
+<img width="450" alt="Screen Shot 2022-09-10 at 4 42 17 PM" src="https://user-images.githubusercontent.com/55787141/189505409-1b19bce8-908c-439d-aa27-08f07b5639ef.png">
+
+<br>
+
+<img width="450" alt="Screen Shot 2022-09-10 at 4 42 53 PM" src="https://user-images.githubusercontent.com/55787141/189505413-5f3c9a7c-9670-41a3-ba69-3ba10e4b4ff6.png">
 </div>
+
 
 ## Installation and Setup Instructions
 
