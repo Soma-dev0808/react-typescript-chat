@@ -15,6 +15,7 @@
 # production
 /frontend/build
 /frontend/coverage
+how_to_deploy.txt
 
 # misc
 .DS_Store
