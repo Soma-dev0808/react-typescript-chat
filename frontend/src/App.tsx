@@ -9,9 +9,12 @@ import { SignUp } from "./page_components/Auth";
 import Private from "./page_components/Private";
 
 import "./App.scss";
+import useSetMobileScreenHight from "./common_components/CustomHooks/useSetMobileScreenHight";
 
 const App: React.FC = () => {
   const history = createBrowserHistory();
+  // adjust hight form mobile screen.
+  useSetMobileScreenHight();
   return (
     <ReactRouter history={history}>
       <Header />

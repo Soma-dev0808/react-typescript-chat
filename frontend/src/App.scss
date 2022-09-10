@@ -8,8 +8,13 @@ body {
   background-color: $color-white;
 }
 
+:root {
+  --app-height: 100vh;
+}
+
 #root {
   height: 100vh;
+  height: var(--app-height);
 }
 
 * {
