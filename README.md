@@ -11,7 +11,7 @@
    * test1test1234
    * test2test1234
 
-**🚨If you open 2 browsers to check realtime chat, please use incognito mode: "Press Ctrl + Shift + n" to avoid override previous session.<br>(This project uses firebase authentication)**
+**🚨If you open 2 browsers to check realtime chat, please use incognito mode: "Press Ctrl + Shift + n" to avoid override your current authentication.<br>(This project uses firebase authentication)**
 
 Demo: https://real-time-chat-cc29e.web.app
 
