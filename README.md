@@ -84,6 +84,10 @@ To Visit App:
 
 `localhost:3000/` 
 
+## Hosted by
+  Frontend: Firebase Hosting
+  Backend: Heroku
+
 ## Check actual application?
 
 Please visit the link below.
