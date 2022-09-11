@@ -1,6 +1,23 @@
 ## React Chat App
 
-#### About this app:
+### [Demo](https://real-time-chat-cc29e.web.app)
+
+**Test accounts:**
+
+ * Email:
+   * test1.test@test.com
+   * test2.test@test.com
+ * Password:
+   * test1test1234
+   * test2test1234
+
+**🚨If you open 2 browsers to check realtime chat, please use incognito mode: "Press Ctrl + Shift + n" to avoid override previous session.<br>(This project uses firebase authentication)**
+
+Demo: https://real-time-chat-cc29e.web.app
+
+<hr>
+
+## About this app:
  
 Real time chat app allows user to communicate with other users and check realtime status of other users in the same chat room. Built with React, React-redux, Typescript, and CSS.
 Use Node.js for the backend, and socket.io for handling real time user status and text messaging. 
