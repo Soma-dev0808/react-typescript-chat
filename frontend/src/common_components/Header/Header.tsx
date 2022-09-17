@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 
 import ApiResponseBar from "../ApiResponseBar";
 import Button from "../Button";
-import useAuth from "../CustomHooks/useAuth";
 import ConfirmDialog from "../ConfirmDialog";
+import useAuth from "../CustomHooks/useAuth";
+import useSetMobileScreenHight from "../CustomHooks/useSetMobileScreenHight";
 
 import { signOut } from "../../page_components/Auth/service/service";
 import { startOrEndCallApi, setAPIError } from "../../features/apiStatSlice";
@@ -24,6 +25,9 @@ const Header: React.FC = () => {
   const { isLoading, isAuth, username } = useAuth();
   // チャットの場合はfixedにしない
   const isChat = location.pathname === routePath.chat;
+
+  // adjust hight form mobile screen.
+  useSetMobileScreenHight();
 
   // Sign-in/out button clicked
   const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {

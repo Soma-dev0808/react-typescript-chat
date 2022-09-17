@@ -4,12 +4,18 @@ import { en } from "../../../utils/language";
 import "./Input.scss";
 
 interface InputState {
-  message: string;
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  sendMessage: (e: React.FormEvent<HTMLFormElement>) => void;
+  message: string,
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  sendMessage: (e: React.FormEvent<HTMLFormElement>) => void,
+  disabled: boolean,
 }
 
-const Input: React.FC<InputState> = ({ message, handleInput, sendMessage }) => {
+const Input: React.FC<InputState> = ({
+  message,
+  handleInput,
+  sendMessage,
+  disabled
+}) => {
   return (
     <form className="chat-input-form" onSubmit={sendMessage}>
       <input
@@ -18,8 +24,14 @@ const Input: React.FC<InputState> = ({ message, handleInput, sendMessage }) => {
         placeholder="Type a message ..."
         value={message}
         onChange={handleInput}
+        disabled={disabled}
       />
-      <button className="sendButton">{en.SEND}</button>
+      <button
+        className="send-button"
+        disabled={disabled}
+      >
+        {en.SEND}
+      </button>
     </form>
   );
 };

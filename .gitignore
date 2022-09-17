@@ -16,6 +16,7 @@
 /frontend/build
 /frontend/coverage
 how_to_deploy.txt
+node_version.txt
 
 # misc
 .DS_Store
