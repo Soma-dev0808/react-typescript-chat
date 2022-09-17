@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Location } from "history";
 import io, { Socket } from "socket.io-client";
-import { setAPIError, selectApiStatus } from "../../features/apiStatSlice";
+import { setAPIError, selectApiStatus, startOrEndCallApi } from "../../features/apiStatSlice";
 
 import InfoBar from "./InfoBar/InfoBar";
 import Input from "./Input/Input";
@@ -38,6 +38,7 @@ interface ChatProps {
 const Chat: React.FC<ChatProps> = ({ location }) => {
   const dispatch = useDispatch();
   const { isApiLoading } = useSelector(selectApiStatus);
+  const [isChatSending, setIsChatSending] = useState<boolean>(false);
 
   // states
   const [activeUsers, setActiveUsers] = useState<CurrUsers[]>([]);
@@ -85,7 +86,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
         }, 500);
       });
 
-      socket.on(en.SOCKET_ROOM_DATA, ({ users }: { users: CurrUsers[] }) => {
+      socket.on(en.SOCKET_ROOM_DATA, ({ users }: { users: CurrUsers[]; }) => {
         setActiveUsers(users);
       });
     }
@@ -133,6 +134,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
   ): Promise<void> => {
     event.preventDefault();
     if (message && room && username) {
+      setIsChatSending(true);
       socket.emit(en.SOCKET_SEND_MESSAGE, message, (err: string) => {
         if (err) {
           dispatch(setAPIError({ apiErrorMessages: err }));
@@ -149,6 +151,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
         const errMessage = res as ApiReturnErrorRes;
         dispatch(setAPIError({ apiErrorMessages: errMessage.errorMessage }));
       }
+      setIsChatSending(false);
     }
   };
 
@@ -187,6 +190,7 @@ const Chat: React.FC<ChatProps> = ({ location }) => {
             message={message}
             handleInput={handleInput}
             sendMessage={sendMessage}
+            disabled={isChatSending}
           />
         </div>
       </div>

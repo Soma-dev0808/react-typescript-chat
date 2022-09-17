@@ -45,6 +45,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         type="password"
         name="password"
         disabled={isLoading}
+        autoComplete="on"
       />
       <Button
         classnames="mt-20"
