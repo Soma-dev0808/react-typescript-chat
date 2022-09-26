@@ -1,6 +1,6 @@
 ## React Chat App
 
-### [Demo](https://real-time-chat-cc29e.web.app)
+### [Application Demo](https://real-time-chat-cc29e.web.app)
 
 **Test accounts:**
 
@@ -29,7 +29,7 @@ Use Node.js for the backend, and socket.io for handling real time user status an
  - <img width="20" alt="react logo" src="https://user-images.githubusercontent.com/55787141/192160993-03f102a0-d47d-49ae-a402-e4a9a80523ec.png"> React.ts v17.0.2
     - <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192161704-f3bb0f19-d65a-487f-88ef-0df01a27b794.svg"> Redux toolkit
     - React router dom v5
- -  <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192161251-856be567-c1ff-4568-808d-1f7ef29d97a8.png"> Vercel(deployment)
+ -  <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192341801-2eaae9ab-da73-4b0e-b474-5388cd739048.png"> Firebase(deployment)
  
 #### Backend
  - <img width="20" alt="react logo" src="https://user-images.githubusercontent.com/55787141/192160993-03f102a0-d47d-49ae-a402-e4a9a80523ec.png"> Node.js
