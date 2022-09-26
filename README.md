@@ -23,6 +23,22 @@ Real time chat app allows user to communicate with other users and check realtim
 Use Node.js for the backend, and socket.io for handling real time user status and text messaging. 
 
 
+### The technology used:
+
+#### Frontend
+ - <img width="20" alt="react logo" src="https://user-images.githubusercontent.com/55787141/192160993-03f102a0-d47d-49ae-a402-e4a9a80523ec.png"> React.ts v17.0.2
+    - <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192161704-f3bb0f19-d65a-487f-88ef-0df01a27b794.svg"> Redux toolkit
+    - React router dom v5
+ -  <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192161251-856be567-c1ff-4568-808d-1f7ef29d97a8.png"> Vercel(deployment)
+ 
+#### Backend
+ - <img width="20" alt="react logo" src="https://user-images.githubusercontent.com/55787141/192160993-03f102a0-d47d-49ae-a402-e4a9a80523ec.png"> Node.js
+    - <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192161704-f3bb0f19-d65a-487f-88ef-0df01a27b794.svg"> Socket.io
+    - <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192340924-bfa9b99f-dfd1-4a15-9462-62d71805b457.png"> Nodemon
+    - express
+ -  <img width="20" alt="vercel-icon-dark" src="https://user-images.githubusercontent.com/55787141/192341262-17cf4ac8-a657-446b-bd40-6fc2ac89ebd7.png"> Heroku(deployment)
+ 
+
 ### Project Screen Shot(s)
 
 <div>
