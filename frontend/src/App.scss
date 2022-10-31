@@ -15,6 +15,7 @@ body {
 #root {
   height: 100vh;
   height: var(--app-height);
+  overflow-y: hidden;
 }
 
 * {

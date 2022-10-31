@@ -20,6 +20,10 @@
     background-color: $color-white;
     overflow-y: scroll;
 
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     &-mobile {
         z-index: 99;
         position: fixed;
